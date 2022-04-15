@@ -22,3 +22,10 @@ coup (liste chainée):
     - valeur
     - type du coup (forcé / hypothèse)
     - combien d'hypothèse
+
+
+
+typedef struct {
+    int** matrice;
+    int size;
+}TakusuGrid;
