@@ -24,8 +24,7 @@ coup (liste chainée):
     - combien d'hypothèse
 
 
-
 typedef struct {
     int** matrice;
     int size;
-}TakusuGrid;
+}TakuzuGrid;
