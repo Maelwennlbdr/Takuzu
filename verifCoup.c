@@ -15,7 +15,7 @@ bool ligAlreadyExisting(TakuzuGrid takusuGrid, int indexOfLig) {
     for (i = 0; (i < size) && (counter != size); i++) {
         if (i != indexOfLig) {
             for (j = 0; j < size; j++) {
-                if (grid[i][j] == grid[indexOfLig][j]) {
+                if ((grid[i][j] == grid[indexOfLig][j])&& (grid[i][j] != -1)) {
                     counter++;
                 }
             }
@@ -37,7 +37,7 @@ bool colAlreadyExisting(TakuzuGrid takusuGrid, int indexOfCol) {
     for (j = 0; (j < size) && (counter != size); j++) {
         if (j != indexOfCol) {
             for (i = 0; i < size; i++) {
-                if (grid[i][j] == grid[i][indexOfCol]) {
+                if ((grid[i][j] == grid[i][indexOfCol]) && (grid[i][j] != -1)){
                     counter++;
                 }
             }
