@@ -65,15 +65,21 @@ bool validityMove(TakuzuGrid takuzuGrid) {
     int size = takuzuGrid.size, counter = 0, **matrice = takuzuGrid.matrice;
     Coordonnee currentMove;
     currentMove = askAndCheckUserCoordonnee(size);
-    playAMove(takuzuGrid, currentMove);
     int indexCol = currentMove.numberCol, indexLig = currentMove.numberLig;
 
-    if ((!colAlreadyExisting(takuzuGrid, indexCol)) && (!ligAlreadyExisting(takuzuGrid, indexLig))) {
-        counter++;
+    if (matrice[indexLig][indexCol] != -1) {
+        return false;
     }
-    if ((sameNumberOf0And1InCol(takuzuGrid, indexCol)) && (sameNumberOf0And1InLig(takuzuGrid, indexLig))) {
-        counter++;
-    }
+    playAMove(takuzuGrid, currentMove);
+
+        if ((!colAlreadyExisting(takuzuGrid, indexCol)) && (!ligAlreadyExisting(takuzuGrid, indexLig))) {
+            counter++;
+        }
+        if ((sameNumberOf0And1InCol(takuzuGrid, indexCol)) && (sameNumberOf0And1InLig(takuzuGrid, indexLig))) {
+            counter++;
+        }
+
+
     if (counter == 2) {
         return true;
     }
