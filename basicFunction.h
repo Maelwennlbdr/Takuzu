@@ -21,17 +21,17 @@ int securityInputInt(int, int);
 char securityInputChar(char, char);
 
 void printMatrice(TakuzuGrid);
-
 void printMatriceWithMask(TakuzuGrid, TakuzuGrid);
+void printUserMatrice(TakusuGrid);
 
 TakuzuGrid createTakuzu(int);
 
 void fillMatrixRand(int **, int);
-
 void fillMatrix(int **, int);
 
 TakuzuGrid createdUserTakuzuGrid(TakuzuGrid, TakuzuGrid);
 
 Coordonnee askAndCheckUserCoordonnee(int);
+void playAMove(TakuzuGrid, Coordonnee);
 
 #endif //TAKUSU_BASICFUNCTION_H
