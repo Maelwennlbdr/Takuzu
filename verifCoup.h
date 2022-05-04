@@ -8,6 +8,6 @@ bool sameNumberOf0And1InCol(TakuzuGrid, int);
 bool ligAlreadyExisting(TakuzuGrid, int);
 bool colAlreadyExisting(TakuzuGrid, int);
 
-bool validityMove(TakuzuGrid);
+int validityMove(TakuzuGrid, TakuzuGrid); //Not in master
 
 #endif //TAKUSU_VERIFCOUP_H

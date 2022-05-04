@@ -1,10 +1,50 @@
 #include "verifCoup.h"
 
-bool sameNumberOf0And1InLig(TakuzuGrid takusuGrid, int indexLig) {
+bool sameNumberOf0And1InLig(TakuzuGrid takusuGrid, int indexLig){
+    int numberOf0=0,numberOf1=0;
+    int**index;
+    index = indexLig;
+    for(int i =0; i<takusuGrid.size; i++){
+        for(int j=0; j<takusuGrid.size; j++){
+            if(index[i][j]==0){
+                numberOf0++;
+            } else{
+                numberOf1++;
+            }
+        }
+        if(numberOf1>numberOf0){
+            printf("il y a plus de 1 que de 0 dans la ligne %d", i);
+            return false;
+        }else if(numberOf0>numberOf1){
+            printf("il y a plus de 0 que de 1 dans la ligne %d", i);
+            return false;
+        }
+        numberOf1=numberOf0=0;
+    }
     return true;
 }
 
-bool sameNumberOf0And1InCol(TakuzuGrid takusuGrid, int indexCol) {
+bool sameNumberOf0And1InCol(TakuzuGrid takusuGrid, int indexCol){
+    int numberOf0=0,numberOf1=0;
+    int**index;
+    index = indexCol;
+    for(int i =0; i<takusuGrid.size; i++){
+        for(int j=0; j<takusuGrid.size; j++){
+            if(index[j][i]==0){
+                numberOf0++;
+            } else{
+                numberOf1++;
+            }
+        }
+        if(numberOf1>numberOf0){
+            printf("il y a plus de 1 que de 0 dans la colonne %d", i);
+            return false;
+        }else if(numberOf0>numberOf1){
+            printf("il y a plus de 0 que de 1 dans la colonne %d", i);
+            return false;
+        }
+        numberOf1=numberOf0=0;
+    }
     return true;
 }
 
@@ -61,28 +101,30 @@ bool colAlreadyExisting(TakuzuGrid takusuGrid, int indexOfCol) {
 // test if a move in correct or not:
 // correct -> true
 // incorrect -> false
-bool validityMove(TakuzuGrid takuzuGrid) {
-    int size = takuzuGrid.size, counter = 0, **matrice = takuzuGrid.matrice;
+int validityMove(TakuzuGrid takuzuGrid, TakuzuGrid originMask) {
+    int size = takuzuGrid.size, counter = 0, **matrice = takuzuGrid.matrice, **mask = originMask.matrice;
     Coordonnee currentMove;
+    //User enter the cell
     currentMove = askAndCheckUserCoordonnee(size);
     int indexCol = currentMove.numberCol, indexLig = currentMove.numberLig;
 
-    if (matrice[indexLig][indexCol] != -1) {
-        return false;
+    //Test if the cell was already visible or not
+    if (mask[indexLig][indexCol] == 1) {
+        return -1;
     }
+    //User play the move
     playAMove(takuzuGrid, currentMove);
 
-        if ((!colAlreadyExisting(takuzuGrid, indexCol)) && (!ligAlreadyExisting(takuzuGrid, indexLig))) {
-            counter++;
-        }
-        if ((sameNumberOf0And1InCol(takuzuGrid, indexCol)) && (sameNumberOf0And1InLig(takuzuGrid, indexLig))) {
-            counter++;
-        }
-
+    if ((!colAlreadyExisting(takuzuGrid, indexCol)) && (!ligAlreadyExisting(takuzuGrid, indexLig))) {
+        counter++;
+    }
+    if ((sameNumberOf0And1InCol(takuzuGrid, indexCol)) && (sameNumberOf0And1InLig(takuzuGrid, indexLig))) {
+        counter++;
+    }
 
     if (counter == 2) {
-        return true;
+        return 1;
     }
     matrice[indexLig][indexCol] = -1;
-    return false;
+    return 0;
 }

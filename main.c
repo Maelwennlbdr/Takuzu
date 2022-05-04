@@ -6,7 +6,7 @@
 int main() {
     srand(time(NULL));
 
-    int size = 4, game=1;
+    int size = 4, game = 1, life = 0;
     TakuzuGrid mat, masque, userGrid;
     mat = createTakuzu(size);
     masque = createTakuzu(size);
@@ -32,11 +32,16 @@ int main() {
     userGrid = createdUserTakuzuGrid(mat, masque);
 
     printUserMatrice(userGrid);
-    while (game == 1) {
-        if (validityMove(userGrid)) {
+    while ((game == 1) && (life < 3)) {
+        if (validityMove(userGrid, masque) == 1) {
             printf("Le coup est valide.\n");
         } else {
-            printf("Le coup n'est pas valide.\n");
+            if (validityMove(userGrid, masque) == -1) {
+                printf("Le coup n'est pas jouable.\n");
+            } else {
+                printf("Le coup n'est pas valide.\n");
+                life++;
+            }
         }
         printUserMatrice(userGrid);
         scanf("%d", &game);
