@@ -5,15 +5,12 @@
 
 int main() {
     srand(time(NULL));
-    allmenu();
-    int size = 4;
+
+    int size = 4, game=1;
     TakuzuGrid mat, masque, userGrid;
     mat = createTakuzu(size);
     masque = createTakuzu(size);
 
-    int game = 1;
-
-    //fillMatrixRand(mat.matrice, mat.size);
     int matrice[4][4] = {{1, 0, 0, 1},
                          {1, 0, 1, 0},
                          {0, 1, 1, 0},
@@ -30,17 +27,9 @@ int main() {
     }
 
     mat.matrice = grid;
-    fillMatrixRand(masque.matrice, masque.size);
-
+    fillMask(masque.matrice, masque.size, 5);
 
     userGrid = createdUserTakuzuGrid(mat, masque);
-
-    printf("Masque :\n");
-    printMatrice(masque);
-    printf("Matrice :\n");
-    printMatrice(mat);
-
-    printMatriceWithMask(mat, masque);
 
     printUserMatrice(userGrid);
     while (game == 1) {
