@@ -16,6 +16,13 @@ typedef struct {
     int numberCol;
 } Coordonnee;
 
+typedef struct ChainOfMove{
+    Coordonnee moveCoordonnee;
+    int numberPlay;
+    int nomberOfTimeModify;
+    struct ChainOfMove* nextLink;
+}ChainOfMove;
+
 int securityInputInt(int, int);
 
 char securityInputChar(char, char);
@@ -28,6 +35,7 @@ TakuzuGrid createTakuzu(int);
 
 void fillMatrixRand(int **, int);
 void fillMatrix(int **, int);
+void fillMask(int **, int, int);
 
 TakuzuGrid createdUserTakuzuGrid(TakuzuGrid, TakuzuGrid);
 

@@ -112,11 +112,7 @@ void fillMatrixRand(int **mat, int size) {
     int i, j;
     for (i = 0; i < size; i++) {
         for (j = 0; j < size; j++) {
-            if (i == 1) {
-                mat[i][j] = 1;
-            } else {
-                mat[i][j] = (rand() % 2);
-            }
+            mat[i][j] = (rand() % 2);
         }
     }
 }
@@ -129,6 +125,23 @@ void fillMatrix(int **mat, int size) {
         }
     }
 }
+
+void fillMask(int **mat, int size, int numberOfCellShow) {
+    int i, j, indexLig, indexCol;
+    for (i = 0; i < numberOfCellShow; i++) {
+        indexLig = rand() % size;
+        indexCol = rand() % size;
+        mat[indexLig][indexCol] = 1;
+    }
+    for (i = 0; i < size; i++) {
+        for (j = 0; j < size; j++) {
+            if (mat[i][j] != 1) {
+                mat[i][j] = 0;
+            }
+        }
+    }
+}
+
 
 TakuzuGrid createdUserTakuzuGrid(TakuzuGrid solutionMatrix, TakuzuGrid maskMatrix) {
     TakuzuGrid userTakusuGrid;
