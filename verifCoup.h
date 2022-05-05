@@ -8,6 +8,8 @@ bool sameNumberOf0And1InCol(TakuzuGrid);
 bool ligAlreadyExisting(TakuzuGrid, int);
 bool colAlreadyExisting(TakuzuGrid, int);
 int validityMove();
+bool Only2SameNumberInLig(TakuzuGrid);
+bool Only2SameNumberInCol(TakuzuGrid);
 
 
 

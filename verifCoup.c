@@ -96,9 +96,9 @@ bool colAlreadyExisting(TakuzuGrid takuzuGrid, int indexOfCol) {
     return false;
 }
 
-// test if a move in correct or not:
+/* test if a move in correct or not:
 // correct -> true
-// incorrect -> false
+// incorrect -> false*/
 int validityMove(TakuzuGrid takuzuGrid, TakuzuGrid originMask) {
     int size = takuzuGrid.size, counter = 0, **matrice = takuzuGrid.matrice, **mask = originMask.matrice;
     Coordonnee currentMove;
@@ -125,4 +125,60 @@ int validityMove(TakuzuGrid takuzuGrid, TakuzuGrid originMask) {
     }
     matrice[indexLig][indexCol] = -1;
     return 0;
+}
+
+/*
+à tester en condition réel
+ */
+
+bool Only2SameNumberInLig(TakuzuGrid takuzuGrid){
+    int i, j;
+    int** index;
+    index=takuzuGrid.matrice;
+    for(i=0; i<takuzuGrid.size; i++){
+        for(j=2; j< takuzuGrid.size; j++){
+            if(index[i][j-1]==1){
+                if(index[i][j-2]==1){
+                    printf("coup incorrect \n");
+                    printf("Il ne peux y avoir trois 1 a la suite.");
+                    return false;
+                }
+            }
+            if(index[i][j-1]==0){
+                if(index[i][j-2]==0){
+                    printf("coup incorrect \n");
+                    printf("Il ne peux y avoir trois 0 a la suite.");
+                    return false;
+                }
+            }
+        }
+    }
+    return true;
+}
+/*
+ à tester en condition réel
+ */
+bool Only2SameNumberInCol(TakuzuGrid takuzuGrid){
+    int i, j;
+    int** index;
+    index=takuzuGrid.matrice;
+    for(i=2; i<takuzuGrid.size; i++){
+        for(j=0; j< takuzuGrid.size; j++){
+            if(index[i-1][j]==1){
+                if(index[i-2][j]==1){
+                    printf("coup incorrect \n");
+                    printf("Il ne peux y avoir trois 1 a la suite.");
+                    return false;
+                }
+            }
+            if(index[i-1][j]==0){
+                if(index[i-2][j]==0){
+                    printf("coup incorrect \n");
+                    printf("Il ne peux y avoir trois 0 a la suite.");
+                    return false;
+                }
+            }
+        }
+    }
+    return true;
 }
