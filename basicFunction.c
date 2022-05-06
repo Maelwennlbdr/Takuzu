@@ -182,9 +182,11 @@ TakuzuGrid createGameTakuzuGrid(int size) {
     switch (size) {
         case 4: {
             createGrid4(grid);
+            break;
         }
         case 8: {
             createGrid8(grid);
+            break;
         }
     }
     gameGrid.matrice = grid;
