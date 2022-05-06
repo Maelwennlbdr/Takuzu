@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include "gameMatrix.h"
 
 typedef struct {
     int **matrice;
@@ -16,6 +17,7 @@ typedef struct {
     int numberCol;
 } Coordonnee;
 
+//Not in master
 typedef struct ChainOfMove{
     Coordonnee moveCoordonnee;
     int numberPlay;
@@ -24,22 +26,25 @@ typedef struct ChainOfMove{
 }ChainOfMove;
 
 int securityInputInt(int, int);
-
+int securityInputSize(); // Not in master
 char securityInputChar(char, char);
 
 void printMatrice(TakuzuGrid);
 void printMatriceWithMask(TakuzuGrid, TakuzuGrid);
-void printUserMatrice(TakusuGrid);
+void printUserMatrice(TakusuGrid);//Not in master
 
 TakuzuGrid createTakuzu(int);
 
 void fillMatrixRand(int **, int);
 void fillMatrix(int **, int);
-void fillMask(int **, int, int);
+void fillMaskRandom(int **, int, int); //Not in master
 
 TakuzuGrid createdUserTakuzuGrid(TakuzuGrid, TakuzuGrid);
+TakuzuGrid createGameTakuzuGrid(int); //Not in master
+TakuzuGrid createMaskTakuzuGrid(int, int); //Not in master
 
 Coordonnee askAndCheckUserCoordonnee(int);
-void playAMove(TakuzuGrid, Coordonnee);
+void playAMove(TakuzuGrid, Coordonnee); //Not in master
+
 
 #endif //TAKUSU_BASICFUNCTION_H

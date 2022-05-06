@@ -9,10 +9,19 @@ int securityInputInt(int borneMin, int borneMax) {
     return userValue;
 }
 
+int securityInputSize() {
+    int size;
+    do {
+        printf("Rentrez la taille souhaiter : ");
+        scanf("%d", &size);
+    } while ((size % 2 == 1) || (size > 9) || (size < 3));
+    return size;
+}
+
 char securityInputChar(char borneMin, char borneMax) {
     char userChar;
     do {
-        printf("Saisir un caractère : \n");
+        printf("Saisir un caractère : ");
         scanf("%c", &userChar);
         if (userChar > 90) {
             userChar -= 32;
@@ -126,7 +135,7 @@ void fillMatrix(int **mat, int size) {
     }
 }
 
-void fillMask(int **mat, int size, int numberOfCellShow) {
+void fillMaskRandom(int **mat, int size, int numberOfCellShow) {
     int i, j, indexLig, indexCol;
     for (i = 0; i < numberOfCellShow; i++) {
         indexLig = rand() % size;
@@ -159,6 +168,33 @@ TakuzuGrid createdUserTakuzuGrid(TakuzuGrid solutionMatrix, TakuzuGrid maskMatri
         }
     }
     return userTakusuGrid;
+}
+
+TakuzuGrid createGameTakuzuGrid(int size) {
+    TakuzuGrid gameGrid;
+    gameGrid = createTakuzu(size);
+    int **grid;
+    grid = (int **) malloc(sizeof(int *) * size);
+    for (int i = 0; i < size; i++) {
+        grid[i] = malloc(sizeof(int) * size);
+    }
+
+    switch (size) {
+        case 4: {
+            createGrid4(grid);
+        }
+        case 8: {
+            createGrid8(grid);
+        }
+    }
+    gameGrid.matrice = grid;
+    return gameGrid;
+}
+
+TakuzuGrid createMaskTakuzuGrid(int size, int numberOfCellShow){
+    TakuzuGrid mask = createTakuzu(size);
+    fillMaskRandom(mask.matrice, size, numberOfCellShow);
+    return mask;
 }
 
 Coordonnee askAndCheckUserCoordonnee(int size) {
