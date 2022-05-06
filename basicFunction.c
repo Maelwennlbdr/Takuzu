@@ -138,8 +138,10 @@ void fillMatrix(int **mat, int size) {
 void fillMaskRandom(int **mat, int size, int numberOfCellShow) {
     int i, j, indexLig, indexCol;
     for (i = 0; i < numberOfCellShow; i++) {
+        do{
         indexLig = rand() % size;
         indexCol = rand() % size;
+        }while(mat[indexLig][indexCol] == 1);
         mat[indexLig][indexCol] = 1;
     }
     for (i = 0; i < size; i++) {
