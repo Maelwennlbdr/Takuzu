@@ -153,6 +153,9 @@ void fillMaskRandom(int **mat, int size, int numberOfCellShow) {
     }
 }
 
+void fillMaskManual(int**mat, int size, int numberOfCellShow){
+    fillMaskRandom(mat, size, numberOfCellShow);
+}
 
 TakuzuGrid createdUserTakuzuGrid(TakuzuGrid solutionMatrix, TakuzuGrid maskMatrix) {
     TakuzuGrid userTakusuGrid;
@@ -195,9 +198,13 @@ TakuzuGrid createGameTakuzuGrid(int size) {
     return gameGrid;
 }
 
-TakuzuGrid createMaskTakuzuGrid(int size, int numberOfCellShow){
+TakuzuGrid createMaskTakuzuGrid(int size, int numberOfCellShow, int randOrManual){
     TakuzuGrid mask = createTakuzu(size);
-    fillMaskRandom(mask.matrice, size, numberOfCellShow);
+    if(randOrManual==1){
+        fillMaskRandom(mask.matrice, size, numberOfCellShow);
+    }else if(randOrManual==2){
+        fillMaskManual(mask.matrice, size, numberOfCellShow);
+    }
     return mask;
 }
 

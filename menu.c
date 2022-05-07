@@ -18,11 +18,13 @@ int allmenu(){
             break;
         }
         case 2:{
-            printf("Part II");
+            printf("Part II-\n");
+            printf("\tFonction non existante pour le moment.\n");
             break;
         }
         case 3:{
-            printf("Part III");
+            printf("Part III-\n");
+            printf("\tFonction non existante pour le moment.\n");
             break;
         }
     }
@@ -42,14 +44,21 @@ int menuPartI(int sizeGrid){
 
     switch (choiceUser) {
         case 1:{
-            printf("Implémenter la fonction");
+            printf("Implémenter la fonction (pour l'instant aléatoire).\n");
+            TakuzuGrid mask;
+            printf("Combien de case voulez-vous afficher :\n");
+            int numberOfCellShow = securityInputInt(1, sizeGrid*sizeGrid);
+            mask = createMaskTakuzuGrid(sizeGrid, numberOfCellShow, 2);
+            printMatrice(mask);
+            printMatriceWithMask(gameGrid, mask);
             break;
         }
         case 2:{
             TakuzuGrid mask;
             printf("Combien de case voulez-vous afficher :\n");
             int numberOfCellShow = securityInputInt(1, sizeGrid*sizeGrid);
-            mask = createMaskTakuzuGrid(sizeGrid, numberOfCellShow);
+            mask = createMaskTakuzuGrid(sizeGrid, numberOfCellShow, 1);
+            printMatrice(mask);
             printMatriceWithMask(gameGrid, mask);
             break;
         }
@@ -58,7 +67,7 @@ int menuPartI(int sizeGrid){
             TakuzuGrid mask, userGrid;
             printf("Combien de case voulez-vous afficher : ");
             int numberOfCellShow = securityInputInt(1, sizeGrid*sizeGrid);
-            mask = createMaskTakuzuGrid(sizeGrid, numberOfCellShow);
+            mask = createMaskTakuzuGrid(sizeGrid, numberOfCellShow, 1);
             printMatriceWithMask(gameGrid, mask);
             userGrid = createdUserTakuzuGrid(gameGrid, mask);
             while (life < 3) {
