@@ -101,10 +101,48 @@ bool colAlreadyExisting(TakuzuGrid takuzuGrid, int indexOfCol) {
 }
 
 bool only2SameNumberInLig(TakuzuGrid takuzuGrid) {
+    int i, j;
+    int **index;
+    index = takuzuGrid.matrice;
+    for (i = 0; i < takuzuGrid.size; i++) {
+        for (j = 2; j < takuzuGrid.size; j++) {
+            if ((index[i][j] == 1) && (index[i][j - 1] == 1) && (index[i][j - 2] == 1)) {
+                printf("coup incorrect \n");
+                printf("Il ne peux y avoir trois 1 a la suite.");
+                return false;
+            }
+            if (index[i][j] == 0) {
+                if (index[i][j - 1] == 0) {
+                    if (index[i][j - 2] == 0) {
+                        printf("coup incorrect \n");
+                        printf("Il ne peux y avoir trois 0 a la suite.");
+                        return false;
+                    }
+                }
+            }
+        }
+    }
     return true;
 }
 
 bool only2SameNumberInCol(TakuzuGrid takuzuGrid) {
+    int i, j;
+    int **index;
+    index = takuzuGrid.matrice;
+    for (i = 2; i < takuzuGrid.size; i++) {
+        for (j = 0; j < takuzuGrid.size; j++) {
+            if ((index[i][j] == 1) && (index[i - 1][j] == 1) && (index[i - 2][j] == 1)) {
+                printf("coup incorrect \n");
+                printf("Il ne peux y avoir trois 1 a la suite.");
+                return false;
+            }
+            if ((index[i][j] == 0) && (index[i - 1][j] == 0) && (index[i - 2][j] == 0)) {
+                printf("coup incorrect \n");
+                printf("Il ne peux y avoir trois 0 a la suite.");
+                return false;
+            }
+        }
+    }
     return true;
 }
 
