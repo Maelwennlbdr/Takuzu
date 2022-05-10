@@ -19,7 +19,9 @@ int allmenu(){
         }
         case 2:{
             printf("Part II-\n");
-            printf("\tFonction non existante pour le moment.\n");
+            int size;
+            size = securityInputSize();
+            menuPartII(size);
             break;
         }
         case 3:{
@@ -87,4 +89,65 @@ int menuPartI(int sizeGrid){
         }
     }
     return 0;
+}
+
+
+int menuPartII(int sizeGrid){
+    int counter=0;
+    TakuzuGrid gameGrid = createGameTakuzuGrid(sizeGrid);
+    TakuzuGrid mask = createMaskTakuzuGrid(sizeGrid, sizeGrid*3, 1);
+    printMatriceWithMask(gameGrid, mask);
+    TakuzuGrid userGrid = createdUserTakuzuGrid(gameGrid, mask);
+    OneMove nextMove;
+    do{
+        nextMove = afterTwoFollowingSameNumberInLig(userGrid);
+        if(nextMove.numberPlay!=-1){
+            fillTakuzuGridWithAMove(userGrid, nextMove);
+            counter++;
+        }
+    } while (nextMove.numberPlay!=-1);
+
+    do{
+        nextMove = afterTwoFollowingSameNumberInCol(userGrid);
+        if(nextMove.numberPlay!=-1){
+            fillTakuzuGridWithAMove(userGrid, nextMove);
+            counter++;
+        }
+    } while (nextMove.numberPlay!=-1);
+
+    do{
+        nextMove = beforeTwoFollowingSameNumberInLig(userGrid);
+        if(nextMove.numberPlay!=-1){
+            fillTakuzuGridWithAMove(userGrid, nextMove);
+            counter++;
+        }
+    } while (nextMove.numberPlay!=-1);
+
+    do{
+        nextMove = beforeTwoFollowingSameNumberInCol(userGrid);
+        if(nextMove.numberPlay!=-1){
+            fillTakuzuGridWithAMove(userGrid, nextMove);
+            counter++;
+        }
+    } while (nextMove.numberPlay!=-1);
+
+    do{
+        nextMove = betweenTwoSameNumberInLig(userGrid);
+        if(nextMove.numberPlay!=-1){
+            fillTakuzuGridWithAMove(userGrid, nextMove);
+            counter++;
+        }
+    } while (nextMove.numberPlay!=-1);
+
+    do{
+        nextMove = betweenTwoSameNumberInCol(userGrid);
+        if(nextMove.numberPlay!=-1){
+            fillTakuzuGridWithAMove(userGrid, nextMove);
+            counter++;
+        }
+    } while (nextMove.numberPlay!=-1);
+
+    printf("%d\n", counter);
+    printUserMatrice(userGrid);
+
 }
