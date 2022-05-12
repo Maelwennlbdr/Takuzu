@@ -138,10 +138,10 @@ void fillMatrix(int **mat, int size) {
 void fillMaskRandom(int **mat, int size, int numberOfCellShow) {
     int i, j, indexLig, indexCol;
     for (i = 0; i < numberOfCellShow; i++) {
-        do{
-        indexLig = rand() % size;
-        indexCol = rand() % size;
-        }while(mat[indexLig][indexCol] == 1);
+        do {
+            indexLig = rand() % size;
+            indexCol = rand() % size;
+        } while (mat[indexLig][indexCol] == 1);
         mat[indexLig][indexCol] = 1;
     }
     for (i = 0; i < size; i++) {
@@ -153,8 +153,23 @@ void fillMaskRandom(int **mat, int size, int numberOfCellShow) {
     }
 }
 
-void fillMaskManual(int**mat, int size, int numberOfCellShow){
-    fillMaskRandom(mat, size, numberOfCellShow);
+void fillMaskManual(int **mat, int size, int numberOfCellShow) {
+    int i, j, indexLig, indexCol;
+    for (i = 0; i < numberOfCellShow; i++) {
+        do {
+            printf("Saisir une coordonnee que vous souhaitez voir apparaitre: \n");
+            indexLig = securityInputInt(0, size - 1);
+            indexCol = securityInputInt(0, size - 1);
+        } while (mat[indexLig][indexCol] == 1);
+        mat[indexLig][indexCol] = 1;
+    }
+    for (i = 0; i < size; i++) {
+        for (j = 0; j < size; j++) {
+            if (mat[i][j] != 1) {
+                mat[i][j] = 0;
+            }
+        }
+    }
 }
 
 TakuzuGrid createdUserTakuzuGrid(TakuzuGrid solutionMatrix, TakuzuGrid maskMatrix) {
@@ -198,11 +213,11 @@ TakuzuGrid createGameTakuzuGrid(int size) {
     return gameGrid;
 }
 
-TakuzuGrid createMaskTakuzuGrid(int size, int numberOfCellShow, int randOrManual){
+TakuzuGrid createMaskTakuzuGrid(int size, int numberOfCellShow, int randOrManual) {
     TakuzuGrid mask = createTakuzu(size);
-    if(randOrManual==1){
+    if (randOrManual == 1) {
         fillMaskRandom(mask.matrice, size, numberOfCellShow);
-    }else if(randOrManual==2){
+    } else if (randOrManual == 2) {
         fillMaskManual(mask.matrice, size, numberOfCellShow);
     }
     return mask;
