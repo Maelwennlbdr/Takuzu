@@ -46,7 +46,6 @@ int menuPartI(int sizeGrid){
 
     switch (choiceUser) {
         case 1:{
-            printf("Implémenter la fonction (pour l'instant aléatoire).\n");
             TakuzuGrid mask;
             printf("Combien de case voulez-vous afficher :\n");
             int numberOfCellShow = securityInputInt(1, sizeGrid*sizeGrid);
