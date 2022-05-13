@@ -20,6 +20,5 @@ ChainOfMove *creer_link(OneMove, char);
 
 ChainOfMove *createHeadLink(OneMove, char, ChainOfMove*);
 
-ChainOfMove
 
 #endif //TAKUSU_FUNCTIONLLC_H
