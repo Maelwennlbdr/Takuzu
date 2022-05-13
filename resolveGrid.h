@@ -20,5 +20,6 @@ OneMove completeColIfANumberIsTheRightNumberOfTime(TakuzuGrid); // Not in master
 
 void fillTakuzuGridWithAMove(TakuzuGrid, OneMove); // Not in master
 int forceMove(TakuzuGrid); // Not in master
+void randomMove(TakuzuGrid, ChainOfMove*); // Not in master
 
 #endif //TAKUSU_RESOLVEGRID_H

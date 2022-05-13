@@ -103,5 +103,8 @@ int menuPartII(int sizeGrid){
         scanf("%c", &timeBetween2Move);
         printUserMatrice(userGrid);
     }
+    ChainOfMove* list=NULL;
+    randomMove(userGrid, list);
+    printUserMatrice(userGrid);
 
 }

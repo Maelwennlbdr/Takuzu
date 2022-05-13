@@ -166,8 +166,8 @@ OneMove completeLigIfANumberIsTheRightNumberOfTime(TakuzuGrid takuzuGrid) {
         } else if ((cpt1 == size / 2) && (cpt0 < size / 2)) {
             contentOfMove = 0;
         }
-        cpt0=0;
-        cpt1=0;
+        cpt0 = 0;
+        cpt1 = 0;
     }
     nextMove.moveCoordonnee = placeOfMove;
     nextMove.numberPlay = contentOfMove;
@@ -195,8 +195,8 @@ OneMove completeColIfANumberIsTheRightNumberOfTime(TakuzuGrid takuzuGrid) {
         } else if ((cpt1 == size / 2) && (cpt0 < size / 2)) {
             contentOfMove = 0;
         }
-        cpt0=0;
-        cpt1=0;
+        cpt0 = 0;
+        cpt1 = 0;
     }
     nextMove.moveCoordonnee = placeOfMove;
     nextMove.numberPlay = contentOfMove;
@@ -261,4 +261,19 @@ int forceMove(TakuzuGrid takuzuGrid) {
     }
 
     return 0;
+}
+
+void randomMove(TakuzuGrid takuzuGrid, ChainOfMove* headList) {
+    int size = takuzuGrid.size, **grid = takuzuGrid.matrice;
+    int indexLig, indexCol;
+    do {
+        indexLig = rand() % size;
+        indexCol = rand() % size;
+    } while (grid[indexLig][indexCol] != -1);
+    grid[indexLig][indexCol] = rand() % 2;
+    OneMove currentMove;
+    currentMove.numberPlay = grid[indexLig][indexCol];
+    currentMove.moveCoordonnee.numberCol = indexCol;
+    currentMove.moveCoordonnee.numberLig = indexLig;
+    headList = createHeadLink(currentMove,'r', headList);
 }
