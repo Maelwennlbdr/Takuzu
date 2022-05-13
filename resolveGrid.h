@@ -6,10 +6,10 @@
 #include "gameMatrix.h"
 
 // Not in master
-typedef struct{
+typedef struct {
     Coordonnee moveCoordonnee;
     int numberPlay;
-}OneMove;
+} OneMove;
 
 OneMove afterTwoFollowingSameNumberInLig(TakuzuGrid); // Not in master
 OneMove afterTwoFollowingSameNumberInCol(TakuzuGrid); // Not in master

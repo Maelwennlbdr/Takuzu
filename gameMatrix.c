@@ -1,6 +1,6 @@
 #include "gameMatrix.h"
 
-void createGrid4(int** grid){
+void createGrid4(int **grid) {
     int matrice[4][4] = {{1, 0, 0, 1},
                          {1, 0, 1, 0},
                          {0, 1, 1, 0},
@@ -12,7 +12,7 @@ void createGrid4(int** grid){
     }
 }
 
-void createGrid8(int** grid){
+void createGrid8(int **grid) {
     int matrice[8][8] = {{1, 0, 1, 1, 0, 1, 0, 0},
                          {1, 0, 1, 0, 1, 0, 0, 1},
                          {0, 1, 0, 1, 1, 0, 1, 0},
