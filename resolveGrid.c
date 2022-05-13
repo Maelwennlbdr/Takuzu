@@ -288,6 +288,9 @@ void randomMove(TakuzuGrid takuzuGrid, ChainOfMove** headList) {
 
 bool validityGrid(TakuzuGrid takuzuGrid){
     int counter = 0, i;
+    if(!isGridComplete(takuzuGrid)){
+        return false;
+    }
     for(i=0; i<takuzuGrid.size; i++){
         if ((!colAlreadyExisting(takuzuGrid, i)) && (!ligAlreadyExisting(takuzuGrid, i))) {
             counter++;
@@ -302,6 +305,21 @@ bool validityGrid(TakuzuGrid takuzuGrid){
     }
 
     if (counter == takuzuGrid.size + 2) {
+        return true;
+    }
+    return false;
+}
+
+bool isGridComplete(TakuzuGrid takuzuGrid){
+    int counter = 0, i, j;
+    for(i=0; i<takuzuGrid.size; i++){
+        for(j=0; j< takuzuGrid.size; j++){
+            if((takuzuGrid.matrice)[i][j] != -1){
+                counter++;
+            }
+        }
+    }
+    if(counter== takuzuGrid.size * takuzuGrid.size){
         return true;
     }
     return false;
