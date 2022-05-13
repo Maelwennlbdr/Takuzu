@@ -112,6 +112,9 @@ int menuPartII(int sizeGrid){
             printUserMatrice(userGrid);
         }
     } while (!isMatriceFull(userGrid));
-
-
+    if(!validityGrid(userGrid)){
+        printf("Oups, marche pas...");
+    } else{
+        printf("AHHHHH, ça marche !!!!!!!!");
+    }
 }

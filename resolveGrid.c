@@ -278,6 +278,27 @@ void randomMove(TakuzuGrid takuzuGrid, ChainOfMove* headList) {
     headList = createHeadLink(currentMove,'r', headList);
 }
 
+bool validityGrid(TakuzuGrid takuzuGrid){
+    int counter = 0, i;
+    for(i=0; i<takuzuGrid.size; i++){
+        if ((!colAlreadyExisting(takuzuGrid, i)) && (!ligAlreadyExisting(takuzuGrid, i))) {
+            counter++;
+        }
+    }
+
+    if ((sameNumberOf0And1InCol(takuzuGrid)) && (sameNumberOf0And1InLig(takuzuGrid))) {
+        counter++;
+    }
+    if ((only2SameNumberInLig(takuzuGrid)) && (only2SameNumberInCol(takuzuGrid))) {
+        counter++;
+    }
+
+    if (counter == takuzuGrid.size + 2) {
+        return true;
+    }
+    return false;
+}
+
 
 ChainOfMove *createHeadLink(OneMove currentMove, char randomOrForce, ChainOfMove* firstHead){
     ChainOfMove *new=(ChainOfMove*) malloc(sizeof (ChainOfMove));
