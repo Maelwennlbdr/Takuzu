@@ -92,61 +92,16 @@ int menuPartI(int sizeGrid){
 
 
 int menuPartII(int sizeGrid){
-    int counter=0;
+    int counter=0, canAMoveBePlay=1;
+    char timeBetween2Move='f';
     TakuzuGrid gameGrid = createGameTakuzuGrid(sizeGrid);
     TakuzuGrid mask = createMaskTakuzuGrid(sizeGrid, sizeGrid*3, 1);
     printMatriceWithMask(gameGrid, mask);
     TakuzuGrid userGrid = createdUserTakuzuGrid(gameGrid, mask);
-    OneMove nextMove;
-    do{
-        nextMove = afterTwoFollowingSameNumberInLig(userGrid);
-        if(nextMove.numberPlay!=-1){
-            fillTakuzuGridWithAMove(userGrid, nextMove);
-            counter++;
-        }
-    } while (nextMove.numberPlay!=-1);
-
-    do{
-        nextMove = afterTwoFollowingSameNumberInCol(userGrid);
-        if(nextMove.numberPlay!=-1){
-            fillTakuzuGridWithAMove(userGrid, nextMove);
-            counter++;
-        }
-    } while (nextMove.numberPlay!=-1);
-
-    do{
-        nextMove = beforeTwoFollowingSameNumberInLig(userGrid);
-        if(nextMove.numberPlay!=-1){
-            fillTakuzuGridWithAMove(userGrid, nextMove);
-            counter++;
-        }
-    } while (nextMove.numberPlay!=-1);
-
-    do{
-        nextMove = beforeTwoFollowingSameNumberInCol(userGrid);
-        if(nextMove.numberPlay!=-1){
-            fillTakuzuGridWithAMove(userGrid, nextMove);
-            counter++;
-        }
-    } while (nextMove.numberPlay!=-1);
-
-    do{
-        nextMove = betweenTwoSameNumberInLig(userGrid);
-        if(nextMove.numberPlay!=-1){
-            fillTakuzuGridWithAMove(userGrid, nextMove);
-            counter++;
-        }
-    } while (nextMove.numberPlay!=-1);
-
-    do{
-        nextMove = betweenTwoSameNumberInCol(userGrid);
-        if(nextMove.numberPlay!=-1){
-            fillTakuzuGridWithAMove(userGrid, nextMove);
-            counter++;
-        }
-    } while (nextMove.numberPlay!=-1);
-
-    printf("%d\n", counter);
-    printUserMatrice(userGrid);
+    while (canAMoveBePlay==1){
+        canAMoveBePlay = forceMove(userGrid);
+        scanf("%c", &timeBetween2Move);
+        printUserMatrice(userGrid);
+    }
 
 }

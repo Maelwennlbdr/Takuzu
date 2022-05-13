@@ -145,8 +145,82 @@ OneMove betweenTwoSameNumberInCol(TakuzuGrid takuzuGrid){
     return nextMove;
 }
 
+OneMove completeLigIfANumberIsTheRightNumberOfTime(TakuzuGrid takuzuGrid){
+    OneMove nextMove;
+    Coordonnee placeOfMove;
+    placeOfMove.numberCol=0;
+    placeOfMove.numberLig=0;
+    nextMove.moveCoordonnee=placeOfMove;
+    nextMove.numberPlay=-1;
+    return nextMove;
+}
+
+OneMove completeColIfANumberIsTheRightNumberOfTime(TakuzuGrid takuzuGrid){
+    OneMove nextMove;
+    Coordonnee placeOfMove;
+    placeOfMove.numberCol=0;
+    placeOfMove.numberLig=0;
+    nextMove.moveCoordonnee=placeOfMove;
+    nextMove.numberPlay=-1;
+    return nextMove;
+}
+
 void fillTakuzuGridWithAMove(TakuzuGrid takuzuGrid, OneMove playMove) {
     int **grid = takuzuGrid.matrice, numberToPlay = playMove.numberPlay;
     int indexLig = (playMove.moveCoordonnee).numberLig, indexCol = (playMove.moveCoordonnee).numberCol;
     grid[indexLig][indexCol] = numberToPlay;
+}
+
+int forceMove(TakuzuGrid takuzuGrid){
+    OneMove nextMove;
+
+    nextMove = afterTwoFollowingSameNumberInLig(takuzuGrid);
+    if(nextMove.numberPlay!=-1){
+        fillTakuzuGridWithAMove(takuzuGrid, nextMove);
+        return 1;
+    }
+
+    nextMove = afterTwoFollowingSameNumberInCol(takuzuGrid);
+    if(nextMove.numberPlay!=-1){
+        fillTakuzuGridWithAMove(takuzuGrid, nextMove);
+        return 1;
+    }
+
+    nextMove = beforeTwoFollowingSameNumberInLig(takuzuGrid);
+    if(nextMove.numberPlay!=-1){
+        fillTakuzuGridWithAMove(takuzuGrid, nextMove);
+        return 1;
+    }
+
+    nextMove = beforeTwoFollowingSameNumberInCol(takuzuGrid);
+    if(nextMove.numberPlay!=-1){
+        fillTakuzuGridWithAMove(takuzuGrid, nextMove);
+        return 1;
+    }
+
+    nextMove = betweenTwoSameNumberInLig(takuzuGrid);
+    if(nextMove.numberPlay!=-1){
+        fillTakuzuGridWithAMove(takuzuGrid, nextMove);
+        return 1;
+    }
+
+    nextMove = betweenTwoSameNumberInCol(takuzuGrid);
+    if(nextMove.numberPlay!=-1){
+        fillTakuzuGridWithAMove(takuzuGrid, nextMove);
+        return 1;
+    }
+
+    nextMove = completeColIfANumberIsTheRightNumberOfTime(takuzuGrid);
+    if(nextMove.numberPlay!=-1){
+        fillTakuzuGridWithAMove(takuzuGrid, nextMove);
+        return 1;
+    }
+
+    nextMove = completeLigIfANumberIsTheRightNumberOfTime(takuzuGrid);
+    if(nextMove.numberPlay!=-1){
+        fillTakuzuGridWithAMove(takuzuGrid, nextMove);
+        return 1;
+    }
+
+    return 0;
 }

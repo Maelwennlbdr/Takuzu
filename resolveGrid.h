@@ -19,6 +19,11 @@ OneMove beforeTwoFollowingSameNumberInCol(TakuzuGrid); // Not in master
 OneMove betweenTwoSameNumberInLig(TakuzuGrid); // Not in master
 OneMove betweenTwoSameNumberInCol(TakuzuGrid); // Not in master
 
+OneMove completeLigIfANumberIsTheRightNumberOfTime(TakuzuGrid); // Not in master
+OneMove completeColIfANumberIsTheRightNumberOfTime(TakuzuGrid); // Not in master
+
+
 void fillTakuzuGridWithAMove(TakuzuGrid, OneMove); // Not in master
+int forceMove(TakuzuGrid); // Not in master
 
 #endif //TAKUSU_RESOLVEGRID_H
