@@ -209,61 +209,69 @@ void fillTakuzuGridWithAMove(TakuzuGrid takuzuGrid, OneMove playMove) {
     grid[indexLig][indexCol] = numberToPlay;
 }
 
-int forceMove(TakuzuGrid takuzuGrid) {
+int forceMove(TakuzuGrid takuzuGrid, ChainOfMove** headList) {
     OneMove nextMove;
 
     nextMove = afterTwoFollowingSameNumberInLig(takuzuGrid);
     if (nextMove.numberPlay != -1) {
         fillTakuzuGridWithAMove(takuzuGrid, nextMove);
+        *headList = createHeadLink(nextMove,'f', *headList);
         return 1;
     }
 
     nextMove = afterTwoFollowingSameNumberInCol(takuzuGrid);
     if (nextMove.numberPlay != -1) {
         fillTakuzuGridWithAMove(takuzuGrid, nextMove);
+        *headList = createHeadLink(nextMove,'f', *headList);
         return 1;
     }
 
     nextMove = beforeTwoFollowingSameNumberInLig(takuzuGrid);
     if (nextMove.numberPlay != -1) {
         fillTakuzuGridWithAMove(takuzuGrid, nextMove);
+        *headList = createHeadLink(nextMove,'f', *headList);
         return 1;
     }
 
     nextMove = beforeTwoFollowingSameNumberInCol(takuzuGrid);
     if (nextMove.numberPlay != -1) {
         fillTakuzuGridWithAMove(takuzuGrid, nextMove);
+        *headList = createHeadLink(nextMove,'f', *headList);
         return 1;
     }
 
     nextMove = betweenTwoSameNumberInLig(takuzuGrid);
     if (nextMove.numberPlay != -1) {
         fillTakuzuGridWithAMove(takuzuGrid, nextMove);
+        *headList = createHeadLink(nextMove,'f', *headList);
         return 1;
     }
 
     nextMove = betweenTwoSameNumberInCol(takuzuGrid);
     if (nextMove.numberPlay != -1) {
         fillTakuzuGridWithAMove(takuzuGrid, nextMove);
+        *headList = createHeadLink(nextMove,'f', *headList);
         return 1;
     }
 
     nextMove = completeLigIfANumberIsTheRightNumberOfTime(takuzuGrid);
     if (nextMove.numberPlay != -1) {
         fillTakuzuGridWithAMove(takuzuGrid, nextMove);
+        *headList = createHeadLink(nextMove,'f', *headList);
         return 1;
     }
 
     nextMove = completeColIfANumberIsTheRightNumberOfTime(takuzuGrid);
     if (nextMove.numberPlay != -1) {
         fillTakuzuGridWithAMove(takuzuGrid, nextMove);
+        *headList = createHeadLink(nextMove,'f', *headList);
         return 1;
     }
 
     return 0;
 }
 
-void randomMove(TakuzuGrid takuzuGrid, ChainOfMove* headList) {
+void randomMove(TakuzuGrid takuzuGrid, ChainOfMove** headList) {
     int size = takuzuGrid.size, **grid = takuzuGrid.matrice;
     int indexLig, indexCol;
     do {
@@ -275,7 +283,7 @@ void randomMove(TakuzuGrid takuzuGrid, ChainOfMove* headList) {
     currentMove.numberPlay = grid[indexLig][indexCol];
     currentMove.moveCoordonnee.numberCol = indexCol;
     currentMove.moveCoordonnee.numberLig = indexLig;
-    headList = createHeadLink(currentMove,'r', headList);
+    *headList = createHeadLink(currentMove,'r', *headList);
 }
 
 bool validityGrid(TakuzuGrid takuzuGrid){
@@ -297,14 +305,4 @@ bool validityGrid(TakuzuGrid takuzuGrid){
         return true;
     }
     return false;
-}
-
-
-ChainOfMove *createHeadLink(OneMove currentMove, char randomOrForce, ChainOfMove* firstHead){
-    ChainOfMove *new=(ChainOfMove*) malloc(sizeof (ChainOfMove));
-    new->forceOrRandomMove=randomOrForce;
-    new->movePlay=currentMove;
-    new->numberOfTimeModify = 1;
-    new->nextLink= firstHead;
-    return new;
 }

@@ -98,20 +98,23 @@ int menuPartII(int sizeGrid){
     TakuzuGrid mask = createMaskTakuzuGrid(sizeGrid, sizeGrid*2, 1);
     printMatriceWithMask(gameGrid, mask);
     TakuzuGrid userGrid = createdUserTakuzuGrid(gameGrid, mask);
+    ChainOfMove* list=NULL;
     do {
         while (canAMoveBePlay==1){
-            canAMoveBePlay = forceMove(userGrid);
+            canAMoveBePlay = forceMove(userGrid, &list);
             scanf("%c", &timeBetween2Move);
             printUserMatrice(userGrid);
         }
         canAMoveBePlay=1;
         if(!isMatriceFull(userGrid)){
             printf("random\n");
-            ChainOfMove* list=NULL;
-            randomMove(userGrid, list);
+            randomMove(userGrid, &list);
             printUserMatrice(userGrid);
         }
     } while (!isMatriceFull(userGrid));
+
+    afficher_liste(list);
+
     if(!validityGrid(userGrid)){
         printf("Oups, marche pas...");
     } else{

@@ -16,7 +16,11 @@ typedef struct ChainOfMove{
     struct ChainOfMove* nextLink;
 }ChainOfMove;
 
+void afficher_liste(ChainOfMove*);
+int taille_liste(ChainOfMove*);
+
 ChainOfMove *createLink(OneMove, char);
+ChainOfMove *createHeadLink(OneMove, char, ChainOfMove*);
 
 void returnToLastRandomMove(ChainOfMove*, TakuzuGrid);
 

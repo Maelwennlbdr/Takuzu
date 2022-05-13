@@ -10,7 +10,31 @@ ChainOfMove *createLink(OneMove currentMove, char randomOrForce) {
     return new;
 }
 
+ChainOfMove *createHeadLink(OneMove currentMove, char randomOrForce, ChainOfMove* firstHead){
+    ChainOfMove *new= createLink(currentMove, randomOrForce);
+    new->nextLink= firstHead;
+    return new;
+}
 
+int taille_liste(ChainOfMove* list) {
+    ChainOfMove *temp = list;
+    int i = 0;
+    while (temp != NULL) {
+        i++;
+        temp = temp->nextLink;
+    }
+    return i;
+}
+
+ void afficher_liste(ChainOfMove *list) {
+    ChainOfMove* temp = list;
+    int size = taille_liste(list), i;
+    for (i = 0; i < size - 1; i++) {
+        printf("%c - ", temp->forceOrRandomMove);
+        temp = temp->nextLink;
+    }
+    printf("%c\n", temp->forceOrRandomMove);
+}
 
 void returnToLastRandomMove(ChainOfMove *headOfList, TakuzuGrid takuzuGrid) {
     int **grid = takuzuGrid.matrice;
