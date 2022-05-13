@@ -150,7 +150,7 @@ OneMove completeLigIfANumberIsTheRightNumberOfTime(TakuzuGrid takuzuGrid) {
     int size = takuzuGrid.size, **grid = takuzuGrid.matrice;
     OneMove nextMove;
     Coordonnee placeOfMove;
-    for (i = 1; i < size - 1; i++) {
+    for (i = 0; (i < size) && (contentOfMove == -1); i++) {
         for (j = 0; j < size; j++) {
             if (grid[i][j] == 1) {
                 cpt1++;
@@ -161,11 +161,13 @@ OneMove completeLigIfANumberIsTheRightNumberOfTime(TakuzuGrid takuzuGrid) {
                 placeOfMove.numberLig = i;
             }
         }
-    }
-    if (cpt0 == size / 2) {
-        contentOfMove = 0;
-    } else if (cpt1 == size / 2) {
-        contentOfMove = 1;
+        if ((cpt0 == size / 2) && (cpt1 < size / 2)) {
+            contentOfMove = 1;
+        } else if ((cpt1 == size / 2) && (cpt0 < size / 2)) {
+            contentOfMove = 0;
+        }
+        cpt0=0;
+        cpt1=0;
     }
     nextMove.moveCoordonnee = placeOfMove;
     nextMove.numberPlay = contentOfMove;
@@ -177,22 +179,24 @@ OneMove completeColIfANumberIsTheRightNumberOfTime(TakuzuGrid takuzuGrid) {
     int size = takuzuGrid.size, **grid = takuzuGrid.matrice;
     OneMove nextMove;
     Coordonnee placeOfMove;
-    for (i = 0; i < size; i++) {
-        for (j = 1; j < size - 1; j++) {
-            if (grid[i][j] == 1) {
+    for (i = 0; (i < size) && (contentOfMove == -1); i++) {
+        for (j = 0; j < size; j++) {
+            if (grid[j][i] == 1) {
                 cpt1++;
-            } else if (grid[i][j] == 0) {
+            } else if (grid[j][i] == 0) {
                 cpt0++;
-            } else {
-                placeOfMove.numberLig = i;
-                placeOfMove.numberCol = j;
+            } else if (grid[j][i] == -1) {
+                placeOfMove.numberCol = i;
+                placeOfMove.numberLig = j;
             }
         }
-    }
-    if (cpt0 == size / 2) {
-        contentOfMove = 0;
-    } else if (cpt1 == size / 2) {
-        contentOfMove = 1;
+        if ((cpt0 == size / 2) && (cpt1 < size / 2)) {
+            contentOfMove = 1;
+        } else if ((cpt1 == size / 2) && (cpt0 < size / 2)) {
+            contentOfMove = 0;
+        }
+        cpt0=0;
+        cpt1=0;
     }
     nextMove.moveCoordonnee = placeOfMove;
     nextMove.numberPlay = contentOfMove;
@@ -244,13 +248,13 @@ int forceMove(TakuzuGrid takuzuGrid) {
         return 1;
     }
 
-    nextMove = completeColIfANumberIsTheRightNumberOfTime(takuzuGrid);
+    nextMove = completeLigIfANumberIsTheRightNumberOfTime(takuzuGrid);
     if (nextMove.numberPlay != -1) {
         fillTakuzuGridWithAMove(takuzuGrid, nextMove);
         return 1;
     }
 
-    nextMove = completeLigIfANumberIsTheRightNumberOfTime(takuzuGrid);
+    nextMove = completeColIfANumberIsTheRightNumberOfTime(takuzuGrid);
     if (nextMove.numberPlay != -1) {
         fillTakuzuGridWithAMove(takuzuGrid, nextMove);
         return 1;
