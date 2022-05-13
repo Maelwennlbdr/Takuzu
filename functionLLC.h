@@ -16,6 +16,10 @@ typedef struct ChainOfMove {
     struct ChainOfMove *nextLink;
 } ChainOfMove;
 
-ChainOfMove *creer_maillon(OneMove, char);
+ChainOfMove *creer_link(OneMove, char);
+
+ChainOfMove *createHeadLink(OneMove, char, ChainOfMove*);
+
+ChainOfMove
 
 #endif //TAKUSU_FUNCTIONLLC_H
