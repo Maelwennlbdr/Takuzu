@@ -9,10 +9,19 @@ int securityInputInt(int borneMin, int borneMax) {
     return userValue;
 }
 
+int securityInputSize() {
+    int size;
+    do {
+        printf("Rentrez la taille souhaiter : ");
+        scanf("%d", &size);
+    } while ((size % 2 == 1) || (size > 9) || (size < 3));
+    return size;
+}
+
 char securityInputChar(char borneMin, char borneMax) {
     char userChar;
     do {
-        printf("Saisir un caractere : \n");
+        printf("Saisir un caractère : ");
         scanf("%c", &userChar);
         if (userChar > 90) {
             userChar -= 32;
@@ -129,8 +138,10 @@ void fillMatrix(int **mat, int size) {
 void fillMaskRandom(int **mat, int size, int numberOfCellShow) {
     int i, j, indexLig, indexCol;
     for (i = 0; i < numberOfCellShow; i++) {
-        indexLig = rand() % size;
-        indexCol = rand() % size;
+        do {
+            indexLig = rand() % size;
+            indexCol = rand() % size;
+        } while (mat[indexLig][indexCol] == 1);
         mat[indexLig][indexCol] = 1;
     }
     for (i = 0; i < size; i++) {
@@ -142,23 +153,24 @@ void fillMaskRandom(int **mat, int size, int numberOfCellShow) {
     }
 }
 
-void fillMaskManual(int**mat, int size, int numberOfCellShow){
+void fillMaskManual(int **mat, int size, int numberOfCellShow) {
     int i, j, indexLig, indexCol;
-    for(i=0; i<numberOfCellShow; i++){
-        printf("Saisir une coordonnee que vous souhaitez voir apparaitre: \n");
-        scanf("%d", &indexLig);
-        scanf("%d", &indexCol);
+    for (i = 0; i < numberOfCellShow; i++) {
+        do {
+            printf("Saisir une coordonnee que vous souhaitez voir apparaitre: \n");
+            indexLig = securityInputInt(0, size - 1);
+            indexCol = securityInputInt(0, size - 1);
+        } while (mat[indexLig][indexCol] == 1);
         mat[indexLig][indexCol] = 1;
     }
-    for(i=0; i<size; i++){
-        for (j=0; j<size; j++){
-            if(mat[i][j]!=1){
-                mat[i][j]=0;
+    for (i = 0; i < size; i++) {
+        for (j = 0; j < size; j++) {
+            if (mat[i][j] != 1) {
+                mat[i][j] = 0;
             }
         }
     }
 }
-
 
 TakuzuGrid createdUserTakuzuGrid(TakuzuGrid solutionMatrix, TakuzuGrid maskMatrix) {
     TakuzuGrid userTakusuGrid;
@@ -176,6 +188,39 @@ TakuzuGrid createdUserTakuzuGrid(TakuzuGrid solutionMatrix, TakuzuGrid maskMatri
         }
     }
     return userTakusuGrid;
+}
+
+TakuzuGrid createGameTakuzuGrid(int size) {
+    TakuzuGrid gameGrid;
+    gameGrid = createTakuzu(size);
+    int **grid;
+    grid = (int **) malloc(sizeof(int *) * size);
+    for (int i = 0; i < size; i++) {
+        grid[i] = malloc(sizeof(int) * size);
+    }
+
+    switch (size) {
+        case 4: {
+            createGrid4(grid);
+            break;
+        }
+        case 8: {
+            createGrid8(grid);
+            break;
+        }
+    }
+    gameGrid.matrice = grid;
+    return gameGrid;
+}
+
+TakuzuGrid createMaskTakuzuGrid(int size, int numberOfCellShow, int randOrManual) {
+    TakuzuGrid mask = createTakuzu(size);
+    if (randOrManual == 1) {
+        fillMaskRandom(mask.matrice, size, numberOfCellShow);
+    } else if (randOrManual == 2) {
+        fillMaskManual(mask.matrice, size, numberOfCellShow);
+    }
+    return mask;
 }
 
 Coordonnee askAndCheckUserCoordonnee(int size) {

@@ -204,3 +204,56 @@ void fillTakuzuGridWithAMove(TakuzuGrid takuzuGrid, OneMove playMove) {
     int indexLig = (playMove.moveCoordonnee).numberLig, indexCol = (playMove.moveCoordonnee).numberCol;
     grid[indexLig][indexCol] = numberToPlay;
 }
+int forceMove(TakuzuGrid takuzuGrid){
+    OneMove nextMove;
+
+    nextMove = afterTwoFollowingSameNumberInLig(takuzuGrid);
+    if(nextMove.numberPlay!=-1){
+        fillTakuzuGridWithAMove(takuzuGrid, nextMove);
+        return 1;
+    }
+
+    nextMove = afterTwoFollowingSameNumberInCol(takuzuGrid);
+    if(nextMove.numberPlay!=-1){
+        fillTakuzuGridWithAMove(takuzuGrid, nextMove);
+        return 1;
+    }
+
+    nextMove = beforeTwoFollowingSameNumberInLig(takuzuGrid);
+    if(nextMove.numberPlay!=-1){
+        fillTakuzuGridWithAMove(takuzuGrid, nextMove);
+        return 1;
+    }
+
+    nextMove = beforeTwoFollowingSameNumberInCol(takuzuGrid);
+    if(nextMove.numberPlay!=-1){
+        fillTakuzuGridWithAMove(takuzuGrid, nextMove);
+        return 1;
+    }
+
+    nextMove = betweenTwoSameNumberInLig(takuzuGrid);
+    if(nextMove.numberPlay!=-1){
+        fillTakuzuGridWithAMove(takuzuGrid, nextMove);
+        return 1;
+    }
+
+    nextMove = betweenTwoSameNumberInCol(takuzuGrid);
+    if(nextMove.numberPlay!=-1){
+        fillTakuzuGridWithAMove(takuzuGrid, nextMove);
+        return 1;
+    }
+
+    nextMove = completeColIfANumberIsTheRightNumberOfTime(takuzuGrid);
+    if(nextMove.numberPlay!=-1){
+        fillTakuzuGridWithAMove(takuzuGrid, nextMove);
+        return 1;
+    }
+
+    nextMove = completeLigIfANumberIsTheRightNumberOfTime(takuzuGrid);
+    if(nextMove.numberPlay!=-1){
+        fillTakuzuGridWithAMove(takuzuGrid, nextMove);
+        return 1;
+    }
+
+    return 0;
+}
