@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "gameMatrix.h"
+#include <stdbool.h>
 
 typedef struct {
     int **matrice;
@@ -39,5 +40,6 @@ TakuzuGrid createMaskTakuzuGrid(int, int, int); //Not in master
 Coordonnee askAndCheckUserCoordonnee(int);
 void playAMove(TakuzuGrid, Coordonnee); //Not in master
 
+bool isMatriceFull(TakuzuGrid); //Not in master
 
 #endif //TAKUSU_BASICFUNCTION_H

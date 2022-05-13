@@ -277,3 +277,13 @@ void randomMove(TakuzuGrid takuzuGrid, ChainOfMove* headList) {
     currentMove.moveCoordonnee.numberLig = indexLig;
     headList = createHeadLink(currentMove,'r', headList);
 }
+
+
+ChainOfMove *createHeadLink(OneMove currentMove, char randomOrForce, ChainOfMove* firstHead){
+    ChainOfMove *new=(ChainOfMove*) malloc(sizeof (ChainOfMove));
+    new->forceOrRandomMove=randomOrForce;
+    new->movePlay=currentMove;
+    new->numberOfTimeModify = 1;
+    new->nextLink= firstHead;
+    return new;
+}

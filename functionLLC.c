@@ -10,13 +10,7 @@ ChainOfMove *createLink(OneMove currentMove, char randomOrForce) {
     return new;
 }
 
-ChainOfMove *createHeadLink(OneMove currentMove, char randomOrForce, ChainOfMove* firstHead){
-    ChainOfMove *new=(ChainOfMove*) malloc(sizeof (ChainOfMove));
-    new->forceOrRandomMove=randomOrForce;
-    new->movePlay=currentMove;
-    new->nextLink= firstHead;
-    return new;
-}
+
 
 void returnToLastRandomMove(ChainOfMove *headOfList, TakuzuGrid takuzuGrid) {
     int **grid = takuzuGrid.matrice;

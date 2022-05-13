@@ -17,7 +17,6 @@ typedef struct ChainOfMove{
 }ChainOfMove;
 
 ChainOfMove *createLink(OneMove, char);
-ChainOfMove *createHeadLink(OneMove, char, ChainOfMove*);
 
 void returnToLastRandomMove(ChainOfMove*, TakuzuGrid);
 

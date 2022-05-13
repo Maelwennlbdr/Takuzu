@@ -245,3 +245,19 @@ void playAMove(TakuzuGrid takuzuGrid, Coordonnee playMove) {
     grid[indexLig][indexCol] = securityInputInt(0, 1);
     takuzuGrid.matrice = grid;
 }
+
+bool isMatriceFull(TakuzuGrid takuzuGrid) {
+    int **grid = takuzuGrid.matrice, size = takuzuGrid.size;
+    int i, j, counter = 0;
+    for (i = 0; i < size; i++) {
+        for (j = 0; j < size; j++) {
+            if (grid[i][j] != -1) {
+                counter++;
+            }
+        }
+    }
+    if (counter == size * size) {
+        return true;
+    }
+    return false;
+}
