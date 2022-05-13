@@ -11,6 +11,13 @@ typedef struct{
     int numberPlay;
 }OneMove;
 
+//Not in master
+typedef struct ChainOfMove{
+    OneMove movePlay;
+    char forceOrRandomMove;
+    struct ChainOfMove* nextLink;
+}ChainOfMove;
+
 OneMove afterTwoFollowingSameNumberInLig(TakuzuGrid); // Not in master
 OneMove afterTwoFollowingSameNumberInCol(TakuzuGrid); // Not in master
 OneMove beforeTwoFollowingSameNumberInLig(TakuzuGrid); // Not in master

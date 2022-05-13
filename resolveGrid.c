@@ -145,23 +145,57 @@ OneMove betweenTwoSameNumberInCol(TakuzuGrid takuzuGrid){
     return nextMove;
 }
 
-OneMove completeLigIfANumberIsTheRightNumberOfTime(TakuzuGrid takuzuGrid){
+OneMove completeLigIfANumberIsTheRightNumberOfTime(TakuzuGrid takuzuGrid) {
+    int i, j, cpt0 = 0, cpt1 = 0, contentOfMove = -1;
+    int size = takuzuGrid.size, **grid = takuzuGrid.matrice;
     OneMove nextMove;
     Coordonnee placeOfMove;
-    placeOfMove.numberCol=0;
-    placeOfMove.numberLig=0;
-    nextMove.moveCoordonnee=placeOfMove;
-    nextMove.numberPlay=-1;
+    for (i = 1; i < size - 1; i++) {
+        for (j = 0; j < size; j++) {
+            if (grid[i][j] == 1) {
+                cpt1++;
+            } else if (grid[i][j] == 0) {
+                cpt0++;
+            } else if (grid[i][j] == -1) {
+                placeOfMove.numberCol = j;
+                placeOfMove.numberLig = i;
+            }
+        }
+    }
+    if (cpt0 == size / 2) {
+        contentOfMove = 0;
+    } else if (cpt1 == size / 2) {
+        contentOfMove = 1;
+    }
+    nextMove.moveCoordonnee = placeOfMove;
+    nextMove.numberPlay = contentOfMove;
     return nextMove;
 }
 
-OneMove completeColIfANumberIsTheRightNumberOfTime(TakuzuGrid takuzuGrid){
+OneMove completeColIfANumberIsTheRightNumberOfTime(TakuzuGrid takuzuGrid) {
+    int i, j, cpt0 = 0, cpt1 = 0, contentOfMove = -1;
+    int size = takuzuGrid.size, **grid = takuzuGrid.matrice;
     OneMove nextMove;
     Coordonnee placeOfMove;
-    placeOfMove.numberCol=0;
-    placeOfMove.numberLig=0;
-    nextMove.moveCoordonnee=placeOfMove;
-    nextMove.numberPlay=-1;
+    for (i = 0; i < size; i++) {
+        for (j = 1; j < size - 1; j++) {
+            if (grid[i][j] == 1) {
+                cpt1++;
+            } else if (grid[i][j] == 0) {
+                cpt0++;
+            } else {
+                placeOfMove.numberLig = i;
+                placeOfMove.numberCol = j;
+            }
+        }
+    }
+    if (cpt0 == size / 2) {
+        contentOfMove = 0;
+    } else if (cpt1 == size / 2) {
+        contentOfMove = 1;
+    }
+    nextMove.moveCoordonnee = placeOfMove;
+    nextMove.numberPlay = contentOfMove;
     return nextMove;
 }
 

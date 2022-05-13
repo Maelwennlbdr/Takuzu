@@ -95,7 +95,7 @@ int menuPartII(int sizeGrid){
     int counter=0, canAMoveBePlay=1;
     char timeBetween2Move='f';
     TakuzuGrid gameGrid = createGameTakuzuGrid(sizeGrid);
-    TakuzuGrid mask = createMaskTakuzuGrid(sizeGrid, sizeGrid*3, 1);
+    TakuzuGrid mask = createMaskTakuzuGrid(sizeGrid, sizeGrid*2, 1);
     printMatriceWithMask(gameGrid, mask);
     TakuzuGrid userGrid = createdUserTakuzuGrid(gameGrid, mask);
     while (canAMoveBePlay==1){
