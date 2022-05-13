@@ -3,9 +3,9 @@
 int allmenu() {
     int choiceUser;
     printf("Fait votre choix :\n");
-    printf("\t1- Résoudre une grille manuellement\n");
-    printf("\t2- Résolution automatique d'une grille\n");
-    printf("\t3- Génération d'une grille\n");
+    printf("\t1- Resoudre une grille manuellement\n");
+    printf("\t2- Resolution automatique d'une grille\n");
+    printf("\t3- Generation d'une grille\n");
     printf("\t4- Quitter\n");
     choiceUser = securityInputInt(1, 4);
 
@@ -37,7 +37,7 @@ int menuPartI(int sizeGrid) {
     int choiceUser;
     printf("\nFait votre choix :\n");
     printf("\t1- Saisir manuellement un masque\n");
-    printf("\t2- Générer automatiquement un masque\n");
+    printf("\t2- Generer automatiquement un masque\n");
     printf("\t3- Jouer\n");
     printf("\t4- Quitter\n");
     choiceUser = securityInputInt(1, 4);

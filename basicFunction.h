@@ -17,13 +17,7 @@ typedef struct {
     int numberCol;
 } Coordonnee;
 
-//Not in master
-typedef struct ChainOfMove {
-    Coordonnee moveCoordonnee;
-    int numberPlay;
-    int nomberOfTimeModify;
-    struct ChainOfMove *nextLink;
-} ChainOfMove;
+
 
 int securityInputInt(int, int);
 

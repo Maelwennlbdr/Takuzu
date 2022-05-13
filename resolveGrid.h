@@ -4,12 +4,10 @@
 #include "verifCoup.h"
 #include "basicFunction.h"
 #include "gameMatrix.h"
+#include "functionLLC.h"
 
 // Not in master
-typedef struct {
-    Coordonnee moveCoordonnee;
-    int numberPlay;
-} OneMove;
+
 
 OneMove afterTwoFollowingSameNumberInLig(TakuzuGrid); // Not in master
 OneMove afterTwoFollowingSameNumberInCol(TakuzuGrid); // Not in master

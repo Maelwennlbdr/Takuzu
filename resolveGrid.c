@@ -150,7 +150,7 @@ OneMove completeLigIfANumberIsTheRightNumberOfTime(TakuzuGrid takuzuGrid) {
     int size = takuzuGrid.size, **grid = takuzuGrid.matrice;
     OneMove nextMove;
     Coordonnee placeOfMove;
-    for (i = 1; i < size - 1; i++) {
+    for (i = 0; i < size; i++) {
         for (j = 0; j < size; j++) {
             if (grid[i][j] == 1) {
                 cpt1++;
@@ -178,7 +178,7 @@ OneMove completeColIfANumberIsTheRightNumberOfTime(TakuzuGrid takuzuGrid) {
     OneMove nextMove;
     Coordonnee placeOfMove;
     for (i = 0; i < size; i++) {
-        for (j = 1; j < size - 1; j++) {
+        for (j = 0; j < size; j++) {
             if (grid[i][j] == 1) {
                 cpt1++;
             } else if (grid[i][j] == 0) {
