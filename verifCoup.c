@@ -48,9 +48,7 @@ bool sameNumberOf0And1InCol(TakuzuGrid takuzuGrid) {
     return true;
 }
 
-// test if a line already exist
-// exist -> true
-// don't exist -> false
+
 bool ligAlreadyExisting(TakuzuGrid takusuGrid, int indexOfLig) {
     int size, i, j, **grid, counter = 0;
     grid = takusuGrid.matrice;
@@ -74,9 +72,7 @@ bool ligAlreadyExisting(TakuzuGrid takusuGrid, int indexOfLig) {
     return false;
 }
 
-// test if a column already exist
-// exist -> true
-// don't exist -> false
+
 bool colAlreadyExisting(TakuzuGrid takuzuGrid, int indexOfCol) {
     int size, i, j, **grid, counter = 0;
     grid = takuzuGrid.matrice;
@@ -146,21 +142,19 @@ bool only2SameNumberInCol(TakuzuGrid takuzuGrid) {
     return true;
 }
 
-// test if a move in correct or not:
-// correct -> true
-// incorrect -> false
+
 int validityMove(TakuzuGrid takuzuGrid, TakuzuGrid originMask) {
     int size = takuzuGrid.size, counter = 0, **matrice = takuzuGrid.matrice, **mask = originMask.matrice;
     Coordonnee currentMove;
-    //User enter the cell
+
     currentMove = askAndCheckUserCoordonnee(size);
     int indexCol = currentMove.numberCol, indexLig = currentMove.numberLig, oldContent = matrice[indexLig][indexCol];
 
-    //Test if the cell was already visible or not
+
     if (mask[indexLig][indexCol] == 1) {
         return -1;
     }
-    //User play the move
+
     playAMove(takuzuGrid, currentMove);
 
     if ((!colAlreadyExisting(takuzuGrid, indexCol)) && (!ligAlreadyExisting(takuzuGrid, indexLig))) {
