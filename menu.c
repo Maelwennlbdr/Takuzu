@@ -116,8 +116,10 @@ int menuPartII(int sizeGrid){
     afficher_liste(list);
 
     if(!validityGrid(userGrid)){
-        printf("Oups, marche pas...");
+        printf("Oups, marche pas...\n");
+        returnToLastRandomMove(list, userGrid);
+        printUserMatrice(userGrid);
     } else{
-        printf("AHHHHH, ça marche !!!!!!!!");
+        printf("AHHHHH, ça marche !!!!!!!!\n");
     }
 }

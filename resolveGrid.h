@@ -24,4 +24,6 @@ void randomMove(TakuzuGrid, ChainOfMove**); // Not in master
 
 bool validityGrid(TakuzuGrid); // Not in master
 
+void returnToLastRandomMove(ChainOfMove*, TakuzuGrid);
+
 #endif //TAKUSU_RESOLVEGRID_H

@@ -22,6 +22,4 @@ int taille_liste(ChainOfMove*);
 ChainOfMove *createLink(OneMove, char);
 ChainOfMove *createHeadLink(OneMove, char, ChainOfMove*);
 
-void returnToLastRandomMove(ChainOfMove*, TakuzuGrid);
-
 #endif //TAKUSU_FUNCTIONLLC_H

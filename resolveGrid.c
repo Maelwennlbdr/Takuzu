@@ -306,3 +306,30 @@ bool validityGrid(TakuzuGrid takuzuGrid){
     }
     return false;
 }
+
+void returnToLastRandomMove(ChainOfMove *headOfList, TakuzuGrid takuzuGrid) {
+    int **grid = takuzuGrid.matrice;
+    int indexCol, indexLig;
+    ChainOfMove *temp = headOfList;
+    while ((headOfList->forceOrRandomMove == 'f') || (headOfList->numberOfTimeModify >= 2)) {
+        indexCol = (headOfList->movePlay).moveCoordonnee.numberCol;
+        indexLig = (headOfList->movePlay).moveCoordonnee.numberLig;
+        grid[indexLig][indexCol] = -1;
+        headOfList = headOfList->nextLink;
+        //free(temp);
+        //ChainOfMove *temp = headOfList;
+    }
+    switch (headOfList->movePlay.numberPlay) {
+        case 1: {
+            headOfList->movePlay.numberPlay = 0;
+            fillTakuzuGridWithAMove(takuzuGrid, headOfList->movePlay);
+            break;
+        }
+        case 0: {
+            headOfList->movePlay.numberPlay = 1;
+            fillTakuzuGridWithAMove(takuzuGrid, headOfList->movePlay);
+            break;
+        }
+    }
+    headOfList->numberOfTimeModify++;
+}
