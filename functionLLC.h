@@ -13,10 +13,11 @@ typedef struct {
 typedef struct ChainOfMove {
     OneMove movePlay;
     char forceOrRandomMove;
+    int numberOfTimeModify;
     struct ChainOfMove *nextLink;
 } ChainOfMove;
 
-ChainOfMove *creer_link(OneMove, char);
+ChainOfMove *createLink(OneMove, char);
 
 ChainOfMove *createHeadLink(OneMove, char, ChainOfMove*);
 

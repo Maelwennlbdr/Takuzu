@@ -1,11 +1,12 @@
 #include "functionLLC.h"
 
-ChainOfMove *creer_link(OneMove currentMove, char randomOrForce) {
+ChainOfMove *createLink(OneMove currentMove, char randomOrForce) {
     ChainOfMove *new;
     new = (ChainOfMove *) malloc(sizeof(ChainOfMove));
     new->forceOrRandomMove = randomOrForce;
     new->movePlay = currentMove;
     new->nextLink = NULL;
+    new->numberOfTimeModify = 1;
     return new;
 }
 
