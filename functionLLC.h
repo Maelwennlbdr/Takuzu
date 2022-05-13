@@ -1,25 +1,27 @@
 #ifndef TAKUSU_FUNCTIONLLC_H
 #define TAKUSU_FUNCTIONLLC_H
+
 #include "basicFunction.h"
 
-// Not in master
-typedef struct{
+//Not in master
+typedef struct {
     Coordonnee moveCoordonnee;
     int numberPlay;
-}OneMove;
-
+} OneMove;
 //Not in master
-typedef struct ChainOfMove{
+typedef struct ChainOfMove {
     OneMove movePlay;
     char forceOrRandomMove;
     int numberOfTimeModify;
-    struct ChainOfMove* nextLink;
-}ChainOfMove;
-
-void afficher_liste(ChainOfMove*);
-int taille_liste(ChainOfMove*);
+    struct ChainOfMove *nextLink;
+} ChainOfMove;
 
 ChainOfMove *createLink(OneMove, char);
-ChainOfMove *createHeadLink(OneMove, char, ChainOfMove*);
+
+ChainOfMove *createHeadLink(OneMove, char, ChainOfMove *);
+
+void afficher_liste(ChainOfMove *);
+
+int taille_liste(ChainOfMove *);
 
 #endif //TAKUSU_FUNCTIONLLC_H

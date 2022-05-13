@@ -11,7 +11,9 @@ ChainOfMove *createLink(OneMove currentMove, char randomOrForce) {
 }
 
 ChainOfMove *createHeadLink(OneMove currentMove, char randomOrForce, ChainOfMove* firstHead){
-    ChainOfMove *new= createLink(currentMove, randomOrForce);
+    ChainOfMove *new=(ChainOfMove*) malloc(sizeof (ChainOfMove));
+    new->forceOrRandomMove=randomOrForce;
+    new->movePlay=currentMove;
     new->nextLink= firstHead;
     return new;
 }

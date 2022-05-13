@@ -333,3 +333,31 @@ void returnToLastRandomMove(ChainOfMove *headOfList, TakuzuGrid takuzuGrid) {
     }
     headOfList->numberOfTimeModify++;
 }
+
+
+ChainOfMove *createHeadLink(OneMove currentMove, char randomOrForce, ChainOfMove* firstHead){
+    ChainOfMove *new=(ChainOfMove*) malloc(sizeof (ChainOfMove));
+    new->forceOrRandomMove=randomOrForce;
+    new->movePlay=currentMove;
+    new->nextLink= firstHead;
+    return new;
+}
+
+void afficher_liste(ChainOfMove *list) {
+    ChainOfMove* temp = list;
+    int size = taille_liste(list), i;
+    for (i = 0; i < size - 1; i++) {
+        printf("%c - ", temp->forceOrRandomMove);
+        temp = temp->nextLink;
+    }
+    printf("%c\n", temp->forceOrRandomMove);
+}
+int taille_liste(ChainOfMove* list) {
+    ChainOfMove *temp = list;
+    int i = 0;
+    while (temp != NULL) {
+        i++;
+        temp = temp->nextLink;
+    }
+    return i;
+}

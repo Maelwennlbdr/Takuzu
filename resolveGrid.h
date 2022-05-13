@@ -26,4 +26,9 @@ bool validityGrid(TakuzuGrid); // Not in master
 
 void returnToLastRandomMove(ChainOfMove*, TakuzuGrid);
 
+
+ChainOfMove *createHeadLink(OneMove, char, ChainOfMove *);
+void afficher_liste(ChainOfMove *);
+int taille_liste(ChainOfMove *);
+
 #endif //TAKUSU_RESOLVEGRID_H
