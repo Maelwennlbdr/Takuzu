@@ -55,7 +55,7 @@ OneMove beforeTwoFollowingSameNumberInLig(TakuzuGrid takuzuGrid) {
     OneMove nextMove;
     Coordonnee placeOfMove;
     for (i = 0; (i < size) && (contentOfMove == -1); i++) {
-        for (j = 0; j < size-2; j++) {
+        for (j = 0; j < size - 2; j++) {
             if ((grid[i][j] == -1) && (grid[i][j + 1] == 1) && (grid[i][j + 2] == 1)) {
                 placeOfMove.numberCol = j;
                 placeOfMove.numberLig = i;
@@ -73,12 +73,12 @@ OneMove beforeTwoFollowingSameNumberInLig(TakuzuGrid takuzuGrid) {
     return nextMove;
 }
 
-OneMove beforeTwoFollowingSameNumberInCol(TakuzuGrid takuzuGrid){
+OneMove beforeTwoFollowingSameNumberInCol(TakuzuGrid takuzuGrid) {
     int i, j, contentOfMove = -1;
     int size = takuzuGrid.size, **grid = takuzuGrid.matrice;
     OneMove nextMove;
     Coordonnee placeOfMove;
-    for (i = 0; (i < size-2) && (contentOfMove == -1); i++) {
+    for (i = 0; (i < size - 2) && (contentOfMove == -1); i++) {
         for (j = 0; j < size; j++) {
             if ((grid[i][j] == -1) && (grid[i + 1][j] == 1) && (grid[i + 2][j] == 1)) {
                 placeOfMove.numberCol = j;
@@ -97,19 +97,19 @@ OneMove beforeTwoFollowingSameNumberInCol(TakuzuGrid takuzuGrid){
     return nextMove;
 }
 
-OneMove betweenTwoSameNumberInLig(TakuzuGrid takuzuGrid){
+OneMove betweenTwoSameNumberInLig(TakuzuGrid takuzuGrid) {
     int i, j, contentOfMove = -1;
     int size = takuzuGrid.size, **grid = takuzuGrid.matrice;
     OneMove nextMove;
     Coordonnee placeOfMove;
     for (i = 0; (i < size) && (contentOfMove == -1); i++) {
-        for (j = 1; j < size-1; j++) {
-            if ((grid[i][j] == -1) && (grid[i][j + 1] == 1) && (grid[i][j -1] == 1)) {
+        for (j = 1; j < size - 1; j++) {
+            if ((grid[i][j] == -1) && (grid[i][j + 1] == 1) && (grid[i][j - 1] == 1)) {
                 placeOfMove.numberCol = j;
                 placeOfMove.numberLig = i;
                 contentOfMove = 0;
             }
-            if ((grid[i][j] == -1) && (grid[i][j + 1] == 0) && (grid[i][j -1] == 0)) {
+            if ((grid[i][j] == -1) && (grid[i][j + 1] == 0) && (grid[i][j - 1] == 0)) {
                 placeOfMove.numberCol = j;
                 placeOfMove.numberLig = i;
                 contentOfMove = 1;
@@ -121,12 +121,12 @@ OneMove betweenTwoSameNumberInLig(TakuzuGrid takuzuGrid){
     return nextMove;
 }
 
-OneMove betweenTwoSameNumberInCol(TakuzuGrid takuzuGrid){
+OneMove betweenTwoSameNumberInCol(TakuzuGrid takuzuGrid) {
     int i, j, contentOfMove = -1;
     int size = takuzuGrid.size, **grid = takuzuGrid.matrice;
     OneMove nextMove;
     Coordonnee placeOfMove;
-    for (i = 1; (i < size-1) && (contentOfMove == -1); i++) {
+    for (i = 1; (i < size - 1) && (contentOfMove == -1); i++) {
         for (j = 0; j < size; j++) {
             if ((grid[i][j] == -1) && (grid[i + 1][j] == 1) && (grid[i - 1][j] == 1)) {
                 placeOfMove.numberCol = j;
@@ -139,6 +139,60 @@ OneMove betweenTwoSameNumberInCol(TakuzuGrid takuzuGrid){
                 contentOfMove = 1;
             }
         }
+    }
+    nextMove.moveCoordonnee = placeOfMove;
+    nextMove.numberPlay = contentOfMove;
+    return nextMove;
+}
+
+OneMove completeLigIfANumberIsTheRightNumberOfTime(TakuzuGrid takuzuGrid) {
+    int i, j, cpt0 = 0, cpt1 = 0, contentOfMove = -1;
+    int size = takuzuGrid.size, **grid = takuzuGrid.matrice;
+    OneMove nextMove;
+    Coordonnee placeOfMove;
+    for (i = 1; i < size - 1; i++) {
+        for (j = 0; j < size; j++) {
+            if (grid[i][j] == 1) {
+                cpt1++;
+            } else if (grid[i][j] == 0) {
+                cpt0++;
+            } else if (grid[i][j] == -1) {
+                placeOfMove.numberCol = j;
+                placeOfMove.numberLig = i;
+            }
+        }
+    }
+    if (cpt0 == size / 2) {
+        contentOfMove = 0;
+    } else if (cpt1 == size / 2) {
+        contentOfMove = 1;
+    }
+    nextMove.moveCoordonnee = placeOfMove;
+    nextMove.numberPlay = contentOfMove;
+    return nextMove;
+}
+
+OneMove completeColIfANumberIsTheRightNumberOfTime(TakuzuGrid takuzuGrid) {
+    int i, j, cpt0 = 0, cpt1 = 0, contentOfMove = -1;
+    int size = takuzuGrid.size, **grid = takuzuGrid.matrice;
+    OneMove nextMove;
+    Coordonnee placeOfMove;
+    for (i = 0; i < size; i++) {
+        for (j = 1; j < size - 1; j++) {
+            if (grid[i][j] == 1) {
+                cpt1++;
+            } else if (grid[i][j] == 0) {
+                cpt0++;
+            } else {
+                placeOfMove.numberLig = i;
+                placeOfMove.numberCol = j;
+            }
+        }
+    }
+    if (cpt0 == size / 2) {
+        contentOfMove = 0;
+    } else if (cpt1 == size / 2) {
+        contentOfMove = 1;
     }
     nextMove.moveCoordonnee = placeOfMove;
     nextMove.numberPlay = contentOfMove;
