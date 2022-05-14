@@ -1,10 +1,21 @@
 #ifndef TAKUSU_RESOLVEGRID_H
 #define TAKUSU_RESOLVEGRID_H
-
 #include "verifCoup.h"
 #include "basicFunction.h"
 #include "gameMatrix.h"
-#include "functionLLC.h"
+
+//Not in master
+typedef struct {
+    Coordonnee moveCoordonnee;
+    int numberPlay;
+} OneMove;
+//Not in master
+typedef struct ChainOfMove {
+    OneMove movePlay;
+    char forceOrRandomMove;
+    int numberOfTimeModify;
+    struct ChainOfMove *nextLink;
+} ChainOfMove;
 
 OneMove afterTwoFollowingSameNumberInLig(TakuzuGrid); // Not in master
 OneMove afterTwoFollowingSameNumberInCol(TakuzuGrid); // Not in master
