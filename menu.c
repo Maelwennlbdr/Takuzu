@@ -96,7 +96,7 @@ int menuPartII(int sizeGrid) {
     int canAMoveBePlay = 1;
     char timeBetween2Move = ' ';
     TakuzuGrid gameGrid = createGameTakuzuGrid(sizeGrid);
-    TakuzuGrid mask = createMaskTakuzuGrid(sizeGrid, sizeGrid * 2, 1);
+    TakuzuGrid mask = createMaskTakuzuGrid(sizeGrid, sizeGrid, 1);
     TakuzuGrid userGrid = createdUserTakuzuGrid(gameGrid, mask);
     ChainOfMove *list = NULL;
     while ((!validityCompleteGrid(userGrid)) && (!isGridComplete(userGrid))) {
@@ -110,8 +110,7 @@ int menuPartII(int sizeGrid) {
             }
             canAMoveBePlay = 1;
             if (!validityGrid(userGrid)) {
-                afficher_liste(list);
-                returnToLastRandomMove(list, userGrid);
+                list = returnToLastRandomMove(list, userGrid);
             }
 
             if (!isMatriceFull(userGrid)) {
@@ -120,13 +119,12 @@ int menuPartII(int sizeGrid) {
             }
         } while (!isMatriceFull(userGrid));
 
-        afficher_liste(list);
         if (!validityCompleteGrid(userGrid)) {
             printf("La matrice n'est pas correct\n");
-            returnToLastRandomMove(list, userGrid);
+            list = returnToLastRandomMove(list, userGrid);
             printUserMatrice(userGrid);
         } else {
-            printf("AHHHHH, ça marche !!!!!!!!\n");
+            printf("Voila, cette matrice est correcte.\n");
         }
     }
 }

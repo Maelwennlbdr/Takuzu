@@ -330,15 +330,16 @@ bool isGridComplete(TakuzuGrid takuzuGrid) {
     return false;
 }
 
-void returnToLastRandomMove(ChainOfMove *headOfList, TakuzuGrid takuzuGrid) {
+ChainOfMove *returnToLastRandomMove(ChainOfMove *headOfList, TakuzuGrid takuzuGrid) {
     int **grid = takuzuGrid.matrice;
     int indexCol, indexLig;
-    ChainOfMove *temp = headOfList;
     while ((headOfList->forceOrRandomMove == 'f') || (headOfList->numberOfTimeModify >= 2)) {
+        ChainOfMove *temp = headOfList;
         indexCol = (headOfList->movePlay).moveCoordonnee.numberCol;
         indexLig = (headOfList->movePlay).moveCoordonnee.numberLig;
         grid[indexLig][indexCol] = -1;
         headOfList = headOfList->nextLink;
+        free(temp);
     }
     switch (headOfList->movePlay.numberPlay) {
         case 1: {
@@ -353,13 +354,21 @@ void returnToLastRandomMove(ChainOfMove *headOfList, TakuzuGrid takuzuGrid) {
         }
     }
     headOfList->numberOfTimeModify++;
+    return headOfList;
 }
 
-
-ChainOfMove *createHeadLink(OneMove currentMove, char randomOrForce, ChainOfMove *firstHead) {
-    ChainOfMove *new = (ChainOfMove *) malloc(sizeof(ChainOfMove));
+ChainOfMove *createLink(OneMove currentMove, char randomOrForce) {
+    ChainOfMove *new;
+    new = (ChainOfMove *) malloc(sizeof(ChainOfMove));
     new->forceOrRandomMove = randomOrForce;
     new->movePlay = currentMove;
+    new->nextLink = NULL;
+    new->numberOfTimeModify = 1;
+    return new;
+}
+
+ChainOfMove *createHeadLink(OneMove currentMove, char randomOrForce, ChainOfMove *firstHead) {
+    ChainOfMove *new = createLink(currentMove, randomOrForce);
     new->nextLink = firstHead;
     return new;
 }
@@ -373,6 +382,16 @@ void afficher_liste(ChainOfMove *list) {
         temp = temp->nextLink;
     }
     printf("%c\n", temp->forceOrRandomMove);
+}
+
+void afficher_liste2(ChainOfMove *list) {
+    ChainOfMove *temp = list;
+    int size = taille_liste(list), i;
+    for (i = 0; i < size - 1; i++) {
+        printf("%d - ", temp->numberOfTimeModify);
+        temp = temp->nextLink;
+    }
+    printf("%d\n", temp->numberOfTimeModify);
 }
 
 int taille_liste(ChainOfMove *list) {
