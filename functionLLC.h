@@ -20,6 +20,8 @@ ChainOfMove *createLink(OneMove, char);
 
 ChainOfMove *createHeadLink(OneMove, char, ChainOfMove *);
 
+ChainOfMove* freeHeadLink(ChainOfMove*);
+
 void afficher_liste(ChainOfMove *);
 
 int taille_liste(ChainOfMove *);

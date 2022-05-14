@@ -10,15 +10,25 @@ ChainOfMove *createLink(OneMove currentMove, char randomOrForce) {
     return new;
 }
 
-ChainOfMove *createHeadLink(OneMove currentMove, char randomOrForce, ChainOfMove* firstHead){
-    ChainOfMove *new=(ChainOfMove*) malloc(sizeof (ChainOfMove));
-    new->forceOrRandomMove=randomOrForce;
-    new->movePlay=currentMove;
-    new->nextLink= firstHead;
+ChainOfMove *createHeadLink(OneMove currentMove, char randomOrForce, ChainOfMove *firstHead) {
+    ChainOfMove *new = (ChainOfMove *) malloc(sizeof(ChainOfMove));
+    new->forceOrRandomMove = randomOrForce;
+    new->movePlay = currentMove;
+    new->nextLink = firstHead;
     return new;
 }
 
-int taille_liste(ChainOfMove* list) {
+ChainOfMove* freeHeadLink(ChainOfMove *headLink) {
+    if (headLink != NULL) {
+        ChainOfMove *tmp = headLink;
+        headLink = headLink->nextLink;
+        tmp->nextLink = NULL;
+        free(tmp);
+    }
+    return headLink;
+}
+
+int taille_liste(ChainOfMove *list) {
     ChainOfMove *temp = list;
     int i = 0;
     while (temp != NULL) {
@@ -28,8 +38,8 @@ int taille_liste(ChainOfMove* list) {
     return i;
 }
 
- void afficher_liste(ChainOfMove *list) {
-    ChainOfMove* temp = list;
+void afficher_liste(ChainOfMove *list) {
+    ChainOfMove *temp = list;
     int size = taille_liste(list), i;
     for (i = 0; i < size - 1; i++) {
         printf("%c - ", temp->forceOrRandomMove);

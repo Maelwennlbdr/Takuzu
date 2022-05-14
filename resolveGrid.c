@@ -209,69 +209,69 @@ void fillTakuzuGridWithAMove(TakuzuGrid takuzuGrid, OneMove playMove) {
     grid[indexLig][indexCol] = numberToPlay;
 }
 
-int forceMove(TakuzuGrid takuzuGrid, ChainOfMove** headList) {
+int forceMove(TakuzuGrid takuzuGrid, ChainOfMove **headList) {
     OneMove nextMove;
 
     nextMove = afterTwoFollowingSameNumberInLig(takuzuGrid);
     if (nextMove.numberPlay != -1) {
         fillTakuzuGridWithAMove(takuzuGrid, nextMove);
-        *headList = createHeadLink(nextMove,'f', *headList);
+        *headList = createHeadLink(nextMove, 'f', *headList);
         return 1;
     }
 
     nextMove = afterTwoFollowingSameNumberInCol(takuzuGrid);
     if (nextMove.numberPlay != -1) {
         fillTakuzuGridWithAMove(takuzuGrid, nextMove);
-        *headList = createHeadLink(nextMove,'f', *headList);
+        *headList = createHeadLink(nextMove, 'f', *headList);
         return 1;
     }
 
     nextMove = beforeTwoFollowingSameNumberInLig(takuzuGrid);
     if (nextMove.numberPlay != -1) {
         fillTakuzuGridWithAMove(takuzuGrid, nextMove);
-        *headList = createHeadLink(nextMove,'f', *headList);
+        *headList = createHeadLink(nextMove, 'f', *headList);
         return 1;
     }
 
     nextMove = beforeTwoFollowingSameNumberInCol(takuzuGrid);
     if (nextMove.numberPlay != -1) {
         fillTakuzuGridWithAMove(takuzuGrid, nextMove);
-        *headList = createHeadLink(nextMove,'f', *headList);
+        *headList = createHeadLink(nextMove, 'f', *headList);
         return 1;
     }
 
     nextMove = betweenTwoSameNumberInLig(takuzuGrid);
     if (nextMove.numberPlay != -1) {
         fillTakuzuGridWithAMove(takuzuGrid, nextMove);
-        *headList = createHeadLink(nextMove,'f', *headList);
+        *headList = createHeadLink(nextMove, 'f', *headList);
         return 1;
     }
 
     nextMove = betweenTwoSameNumberInCol(takuzuGrid);
     if (nextMove.numberPlay != -1) {
         fillTakuzuGridWithAMove(takuzuGrid, nextMove);
-        *headList = createHeadLink(nextMove,'f', *headList);
+        *headList = createHeadLink(nextMove, 'f', *headList);
         return 1;
     }
 
     nextMove = completeLigIfANumberIsTheRightNumberOfTime(takuzuGrid);
     if (nextMove.numberPlay != -1) {
         fillTakuzuGridWithAMove(takuzuGrid, nextMove);
-        *headList = createHeadLink(nextMove,'f', *headList);
+        *headList = createHeadLink(nextMove, 'f', *headList);
         return 1;
     }
 
     nextMove = completeColIfANumberIsTheRightNumberOfTime(takuzuGrid);
     if (nextMove.numberPlay != -1) {
         fillTakuzuGridWithAMove(takuzuGrid, nextMove);
-        *headList = createHeadLink(nextMove,'f', *headList);
+        *headList = createHeadLink(nextMove, 'f', *headList);
         return 1;
     }
 
     return 0;
 }
 
-void randomMove(TakuzuGrid takuzuGrid, ChainOfMove** headList) {
+void randomMove(TakuzuGrid takuzuGrid, ChainOfMove **headList) {
     int size = takuzuGrid.size, **grid = takuzuGrid.matrice;
     int indexLig, indexCol;
     do {
@@ -283,15 +283,13 @@ void randomMove(TakuzuGrid takuzuGrid, ChainOfMove** headList) {
     currentMove.numberPlay = grid[indexLig][indexCol];
     currentMove.moveCoordonnee.numberCol = indexCol;
     currentMove.moveCoordonnee.numberLig = indexLig;
-    *headList = createHeadLink(currentMove,'r', *headList);
+    *headList = createHeadLink(currentMove, 'r', *headList);
 }
 
-bool validityGrid(TakuzuGrid takuzuGrid){
+bool validityGrid(TakuzuGrid takuzuGrid) {
     int counter = 0, i;
-    if(!isGridComplete(takuzuGrid)){
-        return false;
-    }
-    for(i=0; i<takuzuGrid.size; i++){
+
+    for (i = 0; i < takuzuGrid.size; i++) {
         if ((!colAlreadyExisting(takuzuGrid, i)) && (!ligAlreadyExisting(takuzuGrid, i))) {
             counter++;
         }
@@ -310,16 +308,23 @@ bool validityGrid(TakuzuGrid takuzuGrid){
     return false;
 }
 
-bool isGridComplete(TakuzuGrid takuzuGrid){
+bool validityCompleteGrid(TakuzuGrid takuzuGrid) {
+    if (!isGridComplete(takuzuGrid)) {
+        return false;
+    }
+    return validityGrid(takuzuGrid);
+}
+
+bool isGridComplete(TakuzuGrid takuzuGrid) {
     int counter = 0, i, j;
-    for(i=0; i<takuzuGrid.size; i++){
-        for(j=0; j< takuzuGrid.size; j++){
-            if((takuzuGrid.matrice)[i][j] != -1){
+    for (i = 0; i < takuzuGrid.size; i++) {
+        for (j = 0; j < takuzuGrid.size; j++) {
+            if ((takuzuGrid.matrice)[i][j] != -1) {
                 counter++;
             }
         }
     }
-    if(counter== takuzuGrid.size * takuzuGrid.size){
+    if (counter == takuzuGrid.size * takuzuGrid.size) {
         return true;
     }
     return false;
@@ -334,8 +339,6 @@ void returnToLastRandomMove(ChainOfMove *headOfList, TakuzuGrid takuzuGrid) {
         indexLig = (headOfList->movePlay).moveCoordonnee.numberLig;
         grid[indexLig][indexCol] = -1;
         headOfList = headOfList->nextLink;
-        //free(temp);
-        //ChainOfMove *temp = headOfList;
     }
     switch (headOfList->movePlay.numberPlay) {
         case 1: {
@@ -353,16 +356,17 @@ void returnToLastRandomMove(ChainOfMove *headOfList, TakuzuGrid takuzuGrid) {
 }
 
 
-ChainOfMove *createHeadLink(OneMove currentMove, char randomOrForce, ChainOfMove* firstHead){
-    ChainOfMove *new=(ChainOfMove*) malloc(sizeof (ChainOfMove));
-    new->forceOrRandomMove=randomOrForce;
-    new->movePlay=currentMove;
-    new->nextLink= firstHead;
+ChainOfMove *createHeadLink(OneMove currentMove, char randomOrForce, ChainOfMove *firstHead) {
+    ChainOfMove *new = (ChainOfMove *) malloc(sizeof(ChainOfMove));
+    new->forceOrRandomMove = randomOrForce;
+    new->movePlay = currentMove;
+    new->nextLink = firstHead;
     return new;
 }
 
+
 void afficher_liste(ChainOfMove *list) {
-    ChainOfMove* temp = list;
+    ChainOfMove *temp = list;
     int size = taille_liste(list), i;
     for (i = 0; i < size - 1; i++) {
         printf("%c - ", temp->forceOrRandomMove);
@@ -370,7 +374,8 @@ void afficher_liste(ChainOfMove *list) {
     }
     printf("%c\n", temp->forceOrRandomMove);
 }
-int taille_liste(ChainOfMove* list) {
+
+int taille_liste(ChainOfMove *list) {
     ChainOfMove *temp = list;
     int i = 0;
     while (temp != NULL) {

@@ -19,6 +19,7 @@ int allmenu() {
         }
         case 2: {
             printf("Part II-\n");
+            printf("\tDans cette partie pour que le programme joue un nouveau coup, appuyer sur une touche.\n");
             int size;
             size = securityInputSize();
             menuPartII(size);
@@ -92,37 +93,40 @@ int menuPartI(int sizeGrid) {
 
 
 int menuPartII(int sizeGrid) {
-    int counter = 0, canAMoveBePlay = 1;
-    char timeBetween2Move = 'f';
+    int canAMoveBePlay = 1;
+    char timeBetween2Move = ' ';
     TakuzuGrid gameGrid = createGameTakuzuGrid(sizeGrid);
     TakuzuGrid mask = createMaskTakuzuGrid(sizeGrid, sizeGrid * 2, 1);
-    printMatriceWithMask(gameGrid, mask);
     TakuzuGrid userGrid = createdUserTakuzuGrid(gameGrid, mask);
     ChainOfMove *list = NULL;
-    //printf("la : %i", validityGrid(userGrid));
-    while (!validityGrid(userGrid)) {
+    while ((!validityCompleteGrid(userGrid)) && (!isGridComplete(userGrid))) {
         do {
             while (canAMoveBePlay == 1) {
                 canAMoveBePlay = forceMove(userGrid, &list);
                 scanf("%c", &timeBetween2Move);
-                printUserMatrice(userGrid);
+                if (canAMoveBePlay == 1) {
+                    printUserMatrice(userGrid);
+                }
             }
             canAMoveBePlay = 1;
+            if (!validityGrid(userGrid)) {
+                afficher_liste(list);
+                returnToLastRandomMove(list, userGrid);
+            }
+
             if (!isMatriceFull(userGrid)) {
-                printf("random\n");
                 randomMove(userGrid, &list);
                 printUserMatrice(userGrid);
             }
         } while (!isMatriceFull(userGrid));
 
         afficher_liste(list);
-        if (!validityGrid(userGrid)) {
-            printf("Oups, marche pas...\n");
+        if (!validityCompleteGrid(userGrid)) {
+            printf("La matrice n'est pas correct\n");
             returnToLastRandomMove(list, userGrid);
             printUserMatrice(userGrid);
         } else {
             printf("AHHHHH, ça marche !!!!!!!!\n");
         }
     }
-
 }
