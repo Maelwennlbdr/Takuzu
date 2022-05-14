@@ -13,10 +13,10 @@ bool sameNumberOf0And1InLig(TakuzuGrid takuzuGrid) {
             }
         }
         if (numberOf1 > takuzuGrid.size / 2) {
-            printf("Il y a plus de 1 que de 0 dans la ligne %d \n", i);
+            printf("Il y a plus de 1 que de 0 dans la ligne %d \n", i+1);
             return false;
         } else if (numberOf0 > takuzuGrid.size / 2) {
-            printf("Il y a plus de 0 que de 1 dans la ligne %d \n", i);
+            printf("Il y a plus de 0 que de 1 dans la ligne %d \n", i+1);
             return false;
         }
         numberOf1 = numberOf0 = 0;
@@ -37,10 +37,10 @@ bool sameNumberOf0And1InCol(TakuzuGrid takuzuGrid) {
             }
         }
         if (numberOf1 > takuzuGrid.size / 2) {
-            printf("Il y a plus de 1 que de 0 dans la colonne %d \n", i);
+            printf("Il y a plus de 1 que de 0 dans la colonne %d.\n", i+1);
             return false;
         } else if (numberOf0 > takuzuGrid.size / 2) {
-            printf("Il y a plus de 0 que de 1 dans la colonne %d \n", i);
+            printf("Il y a plus de 0 que de 1 dans la colonne %d.\n", i+1);
             return false;
         }
         numberOf1 = numberOf0 = 0;
@@ -66,7 +66,7 @@ bool ligAlreadyExisting(TakuzuGrid takusuGrid, int indexOfLig) {
         }
     }
     if (counter == size) {
-        printf("La ligne %d existe déjà.\n", indexOfLig);
+        printf("La ligne %d existe déjà.\n", indexOfLig+1);
         return true;
     }
     return false;
@@ -90,7 +90,7 @@ bool colAlreadyExisting(TakuzuGrid takuzuGrid, int indexOfCol) {
         }
     }
     if (counter == size) {
-        printf("La colonne %d existe déjà.\n", indexOfCol);
+        printf("La colonne %d existe déjà.\n", indexOfCol+1);
         return true;
     }
     return false;
@@ -103,15 +103,13 @@ bool only2SameNumberInLig(TakuzuGrid takuzuGrid) {
     for (i = 0; i < takuzuGrid.size; i++) {
         for (j = 2; j < takuzuGrid.size; j++) {
             if ((index[i][j] == 1) && (index[i][j - 1] == 1) && (index[i][j - 2] == 1)) {
-                printf("coup incorrect \n");
-                printf("Il ne peux y avoir trois 1 a la suite.");
+                printf("Il ne peux y avoir trois 1 a la suite (ligne %d).\n", j+1);
                 return false;
             }
             if (index[i][j] == 0) {
                 if (index[i][j - 1] == 0) {
                     if (index[i][j - 2] == 0) {
-                        printf("coup incorrect \n");
-                        printf("Il ne peux y avoir trois 0 a la suite.");
+                        printf("Il ne peux y avoir trois 0 a la suite (ligne %d).\n", j+1);
                         return false;
                     }
                 }
@@ -128,13 +126,11 @@ bool only2SameNumberInCol(TakuzuGrid takuzuGrid) {
     for (i = 2; i < takuzuGrid.size; i++) {
         for (j = 0; j < takuzuGrid.size; j++) {
             if ((index[i][j] == 1) && (index[i - 1][j] == 1) && (index[i - 2][j] == 1)) {
-                printf("coup incorrect \n");
-                printf("Il ne peux y avoir trois 1 a la suite.");
+                printf("Il ne peux y avoir trois 1 a la suite (colonne) %d).\n", i+1);
                 return false;
             }
             if ((index[i][j] == 0) && (index[i - 1][j] == 0) && (index[i - 2][j] == 0)) {
-                printf("coup incorrect \n");
-                printf("Il ne peux y avoir trois 0 a la suite.");
+                printf("Il ne peux y avoir trois 0 a la suite  (colonne) %d).\n", i+1);
                 return false;
             }
         }

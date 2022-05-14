@@ -76,7 +76,7 @@ int menuPartI(int sizeGrid) {
                 mask = createMaskTakuzuGrid(sizeGrid, numberOfCellShow, 1);
                 printMatriceWithMask(gameGrid, mask);
                 userGrid = createdUserTakuzuGrid(gameGrid, mask);
-                while (life < 3) {
+                do {
                     move = validityMove(userGrid, mask);
                     if (move == 1) {
                         printf("Le coup est valide.\n");
@@ -88,7 +88,7 @@ int menuPartI(int sizeGrid) {
                     }
                     printUserMatrice(userGrid);
                     printf("Il vous reste %d vies.\n", 3 - life);
-                }
+                } while ((life < 3) && (!isMatriceFull(userGrid)));
                 break;
             }
         }

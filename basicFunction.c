@@ -154,14 +154,14 @@ void fillMaskRandom(int **mat, int size, int numberOfCellShow) {
 }
 
 void fillMaskManual(int **mat, int size, int numberOfCellShow) {
-    int i, j, indexLig, indexCol;
+    int i, j;
+    Coordonnee coordonneeOfCell;
     for (i = 0; i < numberOfCellShow; i++) {
         do {
             printf("Saisir une coordonnee que vous souhaitez voir apparaitre: \n");
-            indexLig = securityInputInt(0, size - 1);
-            indexCol = securityInputInt(0, size - 1);
-        } while (mat[indexLig][indexCol] == 1);
-        mat[indexLig][indexCol] = 1;
+            coordonneeOfCell = askAndCheckUserCoordonnee(size);
+        } while (mat[coordonneeOfCell.numberLig][coordonneeOfCell.numberCol] == 1);
+        mat[coordonneeOfCell.numberLig][coordonneeOfCell.numberCol] = 1;
     }
     for (i = 0; i < size; i++) {
         for (j = 0; j < size; j++) {
