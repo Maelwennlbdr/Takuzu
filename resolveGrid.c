@@ -150,7 +150,7 @@ OneMove completeLigIfANumberIsTheRightNumberOfTime(TakuzuGrid takuzuGrid) {
     int size = takuzuGrid.size, **grid = takuzuGrid.matrice;
     OneMove nextMove;
     Coordonnee placeOfMove;
-    for (i = 0; i < size; i++) {
+    for (i = 0; (i < size) && (contentOfMove == -1); i++) {
         for (j = 0; j < size; j++) {
             if (grid[i][j] == 1) {
                 cpt1++;
@@ -161,11 +161,13 @@ OneMove completeLigIfANumberIsTheRightNumberOfTime(TakuzuGrid takuzuGrid) {
                 placeOfMove.numberLig = i;
             }
         }
-    }
-    if (cpt0 == size / 2) {
-        contentOfMove = 0;
-    } else if (cpt1 == size / 2) {
-        contentOfMove = 1;
+        if ((cpt0 == size / 2) && (cpt1 < size / 2)) {
+            contentOfMove = 1;
+        } else if ((cpt1 == size / 2) && (cpt0 < size / 2)) {
+            contentOfMove = 0;
+        }
+        cpt0 = 0;
+        cpt1 = 0;
     }
     nextMove.moveCoordonnee = placeOfMove;
     nextMove.numberPlay = contentOfMove;
@@ -177,22 +179,24 @@ OneMove completeColIfANumberIsTheRightNumberOfTime(TakuzuGrid takuzuGrid) {
     int size = takuzuGrid.size, **grid = takuzuGrid.matrice;
     OneMove nextMove;
     Coordonnee placeOfMove;
-    for (i = 0; i < size; i++) {
+    for (i = 0; (i < size) && (contentOfMove == -1); i++) {
         for (j = 0; j < size; j++) {
-            if (grid[i][j] == 1) {
+            if (grid[j][i] == 1) {
                 cpt1++;
-            } else if (grid[i][j] == 0) {
+            } else if (grid[j][i] == 0) {
                 cpt0++;
-            } else {
-                placeOfMove.numberLig = i;
-                placeOfMove.numberCol = j;
+            } else if (grid[j][i] == -1) {
+                placeOfMove.numberCol = i;
+                placeOfMove.numberLig = j;
             }
         }
-    }
-    if (cpt0 == size / 2) {
-        contentOfMove = 0;
-    } else if (cpt1 == size / 2) {
-        contentOfMove = 1;
+        if ((cpt0 == size / 2) && (cpt1 < size / 2)) {
+            contentOfMove = 1;
+        } else if ((cpt1 == size / 2) && (cpt0 < size / 2)) {
+            contentOfMove = 0;
+        }
+        cpt0 = 0;
+        cpt1 = 0;
     }
     nextMove.moveCoordonnee = placeOfMove;
     nextMove.numberPlay = contentOfMove;
@@ -205,56 +209,197 @@ void fillTakuzuGridWithAMove(TakuzuGrid takuzuGrid, OneMove playMove) {
     grid[indexLig][indexCol] = numberToPlay;
 }
 
-int forceMove(TakuzuGrid takuzuGrid) {
+int forceMove(TakuzuGrid takuzuGrid, ChainOfMove **headList) {
     OneMove nextMove;
 
     nextMove = afterTwoFollowingSameNumberInLig(takuzuGrid);
     if (nextMove.numberPlay != -1) {
         fillTakuzuGridWithAMove(takuzuGrid, nextMove);
+        *headList = createHeadLink(nextMove, 'f', *headList);
         return 1;
     }
 
     nextMove = afterTwoFollowingSameNumberInCol(takuzuGrid);
     if (nextMove.numberPlay != -1) {
         fillTakuzuGridWithAMove(takuzuGrid, nextMove);
+        *headList = createHeadLink(nextMove, 'f', *headList);
         return 1;
     }
 
     nextMove = beforeTwoFollowingSameNumberInLig(takuzuGrid);
     if (nextMove.numberPlay != -1) {
         fillTakuzuGridWithAMove(takuzuGrid, nextMove);
+        *headList = createHeadLink(nextMove, 'f', *headList);
         return 1;
     }
 
     nextMove = beforeTwoFollowingSameNumberInCol(takuzuGrid);
     if (nextMove.numberPlay != -1) {
         fillTakuzuGridWithAMove(takuzuGrid, nextMove);
+        *headList = createHeadLink(nextMove, 'f', *headList);
         return 1;
     }
 
     nextMove = betweenTwoSameNumberInLig(takuzuGrid);
     if (nextMove.numberPlay != -1) {
         fillTakuzuGridWithAMove(takuzuGrid, nextMove);
+        *headList = createHeadLink(nextMove, 'f', *headList);
         return 1;
     }
 
     nextMove = betweenTwoSameNumberInCol(takuzuGrid);
     if (nextMove.numberPlay != -1) {
         fillTakuzuGridWithAMove(takuzuGrid, nextMove);
-        return 1;
-    }
-
-    nextMove = completeColIfANumberIsTheRightNumberOfTime(takuzuGrid);
-    if (nextMove.numberPlay != -1) {
-        fillTakuzuGridWithAMove(takuzuGrid, nextMove);
+        *headList = createHeadLink(nextMove, 'f', *headList);
         return 1;
     }
 
     nextMove = completeLigIfANumberIsTheRightNumberOfTime(takuzuGrid);
     if (nextMove.numberPlay != -1) {
         fillTakuzuGridWithAMove(takuzuGrid, nextMove);
+        *headList = createHeadLink(nextMove, 'f', *headList);
+        return 1;
+    }
+
+    nextMove = completeColIfANumberIsTheRightNumberOfTime(takuzuGrid);
+    if (nextMove.numberPlay != -1) {
+        fillTakuzuGridWithAMove(takuzuGrid, nextMove);
+        *headList = createHeadLink(nextMove, 'f', *headList);
         return 1;
     }
 
     return 0;
+}
+
+void randomMove(TakuzuGrid takuzuGrid, ChainOfMove **headList) {
+    int size = takuzuGrid.size, **grid = takuzuGrid.matrice;
+    int indexLig, indexCol;
+    do {
+        indexLig = rand() % size;
+        indexCol = rand() % size;
+    } while (grid[indexLig][indexCol] != -1);
+    grid[indexLig][indexCol] = rand() % 2;
+    OneMove currentMove;
+    currentMove.numberPlay = grid[indexLig][indexCol];
+    currentMove.moveCoordonnee.numberCol = indexCol;
+    currentMove.moveCoordonnee.numberLig = indexLig;
+    *headList = createHeadLink(currentMove, 'r', *headList);
+}
+
+bool validityGrid(TakuzuGrid takuzuGrid) {
+    int counter = 0, i;
+
+    for (i = 0; i < takuzuGrid.size; i++) {
+        if ((!colAlreadyExisting(takuzuGrid, i)) && (!ligAlreadyExisting(takuzuGrid, i))) {
+            counter++;
+        }
+    }
+
+    if ((sameNumberOf0And1InCol(takuzuGrid)) && (sameNumberOf0And1InLig(takuzuGrid))) {
+        counter++;
+    }
+    if ((only2SameNumberInLig(takuzuGrid)) && (only2SameNumberInCol(takuzuGrid))) {
+        counter++;
+    }
+
+    if (counter == takuzuGrid.size + 2) {
+        return true;
+    }
+    return false;
+}
+
+bool validityCompleteGrid(TakuzuGrid takuzuGrid) {
+    if (!isGridComplete(takuzuGrid)) {
+        return false;
+    }
+    return validityGrid(takuzuGrid);
+}
+
+bool isGridComplete(TakuzuGrid takuzuGrid) {
+    int counter = 0, i, j;
+    for (i = 0; i < takuzuGrid.size; i++) {
+        for (j = 0; j < takuzuGrid.size; j++) {
+            if ((takuzuGrid.matrice)[i][j] != -1) {
+                counter++;
+            }
+        }
+    }
+    if (counter == takuzuGrid.size * takuzuGrid.size) {
+        return true;
+    }
+    return false;
+}
+
+ChainOfMove *returnToLastRandomMove(ChainOfMove *headOfList, TakuzuGrid takuzuGrid) {
+    int **grid = takuzuGrid.matrice;
+    int indexCol, indexLig;
+    while ((headOfList->forceOrRandomMove == 'f') || (headOfList->numberOfTimeModify >= 2)) {
+        ChainOfMove *temp = headOfList;
+        indexCol = (headOfList->movePlay).moveCoordonnee.numberCol;
+        indexLig = (headOfList->movePlay).moveCoordonnee.numberLig;
+        grid[indexLig][indexCol] = -1;
+        headOfList = headOfList->nextLink;
+        free(temp);
+    }
+    switch (headOfList->movePlay.numberPlay) {
+        case 1: {
+            headOfList->movePlay.numberPlay = 0;
+            fillTakuzuGridWithAMove(takuzuGrid, headOfList->movePlay);
+            break;
+        }
+        case 0: {
+            headOfList->movePlay.numberPlay = 1;
+            fillTakuzuGridWithAMove(takuzuGrid, headOfList->movePlay);
+            break;
+        }
+    }
+    headOfList->numberOfTimeModify++;
+    return headOfList;
+}
+
+ChainOfMove *createLink(OneMove currentMove, char randomOrForce) {
+    ChainOfMove *new;
+    new = (ChainOfMove *) malloc(sizeof(ChainOfMove));
+    new->forceOrRandomMove = randomOrForce;
+    new->movePlay = currentMove;
+    new->nextLink = NULL;
+    new->numberOfTimeModify = 1;
+    return new;
+}
+
+ChainOfMove *createHeadLink(OneMove currentMove, char randomOrForce, ChainOfMove *firstHead) {
+    ChainOfMove *new = createLink(currentMove, randomOrForce);
+    new->nextLink = firstHead;
+    return new;
+}
+
+
+void afficher_liste(ChainOfMove *list) {
+    ChainOfMove *temp = list;
+    int size = taille_liste(list), i;
+    for (i = 0; i < size - 1; i++) {
+        printf("%c - ", temp->forceOrRandomMove);
+        temp = temp->nextLink;
+    }
+    printf("%c\n", temp->forceOrRandomMove);
+}
+
+void afficher_liste2(ChainOfMove *list) {
+    ChainOfMove *temp = list;
+    int size = taille_liste(list), i;
+    for (i = 0; i < size - 1; i++) {
+        printf("%d - ", temp->numberOfTimeModify);
+        temp = temp->nextLink;
+    }
+    printf("%d\n", temp->numberOfTimeModify);
+}
+
+int taille_liste(ChainOfMove *list) {
+    ChainOfMove *temp = list;
+    int i = 0;
+    while (temp != NULL) {
+        i++;
+        temp = temp->nextLink;
+    }
+    return i;
 }
