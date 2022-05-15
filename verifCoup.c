@@ -126,11 +126,11 @@ bool only2SameNumberInCol(TakuzuGrid takuzuGrid) {
     for (i = 2; i < takuzuGrid.size; i++) {
         for (j = 0; j < takuzuGrid.size; j++) {
             if ((index[i][j] == 1) && (index[i - 1][j] == 1) && (index[i - 2][j] == 1)) {
-                printf("Il ne peux y avoir trois 1 a la suite (colonne) %d).\n", i+1);
+                printf("Il ne peux y avoir trois 1 a la suite (colonne %d).\n", i+1);
                 return false;
             }
             if ((index[i][j] == 0) && (index[i - 1][j] == 0) && (index[i - 2][j] == 0)) {
-                printf("Il ne peux y avoir trois 0 a la suite  (colonne) %d).\n", i+1);
+                printf("Il ne peux y avoir trois 0 a la suite  (colonne %d).\n", i+1);
                 return false;
             }
         }

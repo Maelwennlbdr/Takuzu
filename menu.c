@@ -28,7 +28,9 @@ int allmenu() {
             }
             case 3: {
                 printf("Part III-\n");
-                printf("\tFonction non existante pour le moment.\n");
+                int size;
+                size = securityInputSize();
+                menuPartIII(size);
                 break;
             }
         }
@@ -132,4 +134,102 @@ int menuPartII(int sizeGrid) {
             printf("Voila, cette matrice est correcte.\n");
         }
     }
+}
+
+
+int menuPartIII(int sizeGrid) {
+    int choiceUser;
+    do {
+        printf("\nFait votre choix :\n");
+        printf("\t1- Afficher l'ensemble des lignes valides\n");
+        printf("\t2- Generer une grille de Takuzu \n");
+        printf("\t3- Quitter \n");
+        choiceUser = securityInputInt(1, 3);
+        switch (choiceUser) {
+            case 1: {
+                if (sizeGrid == 4) {
+                    printf("1010\n"
+                           "0110\n"
+                           "0011\n"
+                           "1001\n"
+                           "1100\n"
+                           "0101\n");
+                } else if (sizeGrid == 8) {
+                    printf("00101101\n"
+                           "00110011\n"
+                           "00110101\n"
+                           "00110110\n"
+                           "01001011\n"
+                           "01001101\n"
+                           "01010011\n"
+                           "01010101\n"
+                           "01010110\n"
+                           "01011001\n"
+                           "01011010\n"
+                           "01100101\n"
+                           "01100110\n"
+                           "01101001\n"
+                           "01101010\n"
+                           "10010011\n"
+                           "10010101\n"
+                           "10010110\n"
+                           "10011010\n"
+                           "10100101\n"
+                           "10100110\n"
+                           "10101001\n"
+                           "10101010\n"
+                           "10101100\n"
+                           "10110010\n"
+                           "10110100\n"
+                           "11001001\n"
+                           "11001010\n"
+                           "11001100\n"
+                           "11010010\n"
+                           "11010100\n");
+                } else {
+                    printf("Valeur non prise en compte.\n");
+                }
+                break;
+            }
+            case 2: {
+                TakuzuGrid newGrid = createTakuzu(sizeGrid);
+                fillMatrix(newGrid.matrice, newGrid.size);
+                int canAMoveBePlay = 1;
+                char timeBetween2Move = ' ';
+                ChainOfMove *list = NULL;
+                while ((!validityCompleteGrid(newGrid)) && (!isMatriceFull(newGrid))) {
+                    do {
+                        while (canAMoveBePlay == 1) {
+                            canAMoveBePlay = forceMove(newGrid, &list);
+                            scanf("%c", &timeBetween2Move);
+                            if (canAMoveBePlay == 1) {
+                                printUserMatrice(newGrid);
+                            }
+                        }
+                        canAMoveBePlay = 1;
+                        if (!validityGrid(newGrid)) {
+                            list = returnToLastRandomMove(list, newGrid);
+                        }
+
+                        if (!isMatriceFull(newGrid)) {
+                            randomMove(newGrid, &list);
+                            printUserMatrice(newGrid);
+                        }
+                        if (!validityGrid(newGrid)) {
+                            list = returnToLastRandomMove(list, newGrid);
+                        }
+                    } while (!isMatriceFull(newGrid));
+
+                    if (!validityCompleteGrid(newGrid)) {
+                        printf("La matrice n'est pas correct\n");
+                        list = returnToLastRandomMove(list, newGrid);
+                        printUserMatrice(newGrid);
+                    } else {
+                        printf("Voila, cette matrice est correcte.\n");
+                    }
+                }
+                break;
+            }
+        }
+    } while (choiceUser != 3);
 }
