@@ -106,7 +106,7 @@ int menuPartII(int sizeGrid) {
     int canAMoveBePlay = 1;
     char timeBetween2Move = ' ';
     TakuzuGrid gameGrid = createGameTakuzuGrid(sizeGrid);
-    TakuzuGrid mask = createMaskTakuzuGrid(sizeGrid, sizeGrid, 1);
+    TakuzuGrid mask = createMaskTakuzuGrid(sizeGrid, sizeGrid * 2, 1);
     TakuzuGrid userGrid = createdUserTakuzuGrid(gameGrid, mask);
     ChainOfMove *list = NULL;
     while ((!validityCompleteGrid(userGrid)) && (!isMatriceFull(userGrid))) {
@@ -126,6 +126,9 @@ int menuPartII(int sizeGrid) {
             if (!isMatriceFull(userGrid)) {
                 randomMove(userGrid, &list);
                 printUserMatrice(userGrid);
+            }
+            if (!validityGrid(userGrid)) {
+                list = returnToLastRandomMove(list, userGrid);
             }
         } while (!isMatriceFull(userGrid));
 
