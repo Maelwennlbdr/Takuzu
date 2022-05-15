@@ -40,8 +40,5 @@ ChainOfMove *returnToLastRandomMove(ChainOfMove*, TakuzuGrid);
 
 ChainOfMove *createLink(OneMove, char);
 ChainOfMove *createHeadLink(OneMove, char, ChainOfMove *);
-void afficher_liste(ChainOfMove *);
-void afficher_liste2(ChainOfMove *);
-int taille_liste(ChainOfMove *);
 
 #endif //TAKUSU_RESOLVEGRID_H

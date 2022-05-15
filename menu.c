@@ -56,6 +56,9 @@ int menuPartI(int sizeGrid) {
                 TakuzuGrid mask;
                 printf("Combien de case voulez-vous afficher :\n");
                 int numberOfCellShow = securityInputInt(1, sizeGrid * sizeGrid);
+                TakuzuGrid newGrid = createTakuzu(sizeGrid);
+                fillMatrix(newGrid.matrice, newGrid.size);
+                printUserMatrice(newGrid);
                 mask = createMaskTakuzuGrid(sizeGrid, numberOfCellShow, 2);
                 printMatrice(mask);
                 printMatriceWithMask(gameGrid, mask);
@@ -192,6 +195,7 @@ int menuPartIII(int sizeGrid) {
                 break;
             }
             case 2: {
+                printf("\tDans cette partie pour que le programme joue un nouveau coup, appuyer sur entrée.\n");
                 TakuzuGrid newGrid = createTakuzu(sizeGrid);
                 fillMatrix(newGrid.matrice, newGrid.size);
                 int canAMoveBePlay = 1;

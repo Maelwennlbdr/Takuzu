@@ -28,7 +28,6 @@ void printUserMatrice(TakusuGrid);//Not in master
 
 TakuzuGrid createTakuzu(int);
 
-void fillMatrixRand(int **, int);
 void fillMatrix(int **, int);
 void fillMaskRandom(int **, int, int); //Not in master
 void fillMaskManual(int **, int, int); //Not in master

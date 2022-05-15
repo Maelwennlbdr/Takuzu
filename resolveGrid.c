@@ -357,34 +357,3 @@ ChainOfMove *createHeadLink(OneMove currentMove, char randomOrForce, ChainOfMove
     new->nextLink = firstHead;
     return new;
 }
-
-
-void afficher_liste(ChainOfMove *list) {
-    ChainOfMove *temp = list;
-    int size = taille_liste(list), i;
-    for (i = 0; i < size - 1; i++) {
-        printf("%c - ", temp->forceOrRandomMove);
-        temp = temp->nextLink;
-    }
-    printf("%c\n", temp->forceOrRandomMove);
-}
-
-void afficher_liste2(ChainOfMove *list) {
-    ChainOfMove *temp = list;
-    int size = taille_liste(list), i;
-    for (i = 0; i < size - 1; i++) {
-        printf("%d - ", temp->numberOfTimeModify);
-        temp = temp->nextLink;
-    }
-    printf("%d\n", temp->numberOfTimeModify);
-}
-
-int taille_liste(ChainOfMove *list) {
-    ChainOfMove *temp = list;
-    int i = 0;
-    while (temp != NULL) {
-        i++;
-        temp = temp->nextLink;
-    }
-    return i;
-}
