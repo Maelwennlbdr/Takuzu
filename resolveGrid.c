@@ -297,7 +297,7 @@ bool validityGrid(TakuzuGrid takuzuGrid) {
     if ((sameNumberOf0And1InCol(takuzuGrid)) && (sameNumberOf0And1InLig(takuzuGrid))) {
         counter++;
     }
-    if ((only2SameNumberInLig(takuzuGrid)) && (only2SameNumberInCol(takuzuGrid))) {
+    if ((Only2SameNumberInLig(takuzuGrid)) && (Only2SameNumberInCol(takuzuGrid))) {
         counter++;
     }
 

@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "gameMatrix.h"
+#include <stdbool.h>
 
 typedef struct {
     int **matrice;
@@ -26,7 +27,7 @@ void printMatrice(TakuzuGrid);
 
 void printMatriceWithMask(TakuzuGrid, TakuzuGrid);
 
-void printUserMatrice(TakusuGrid);//Not in master
+void printUserMatrice(TakuzuGrid);//Not in master
 
 TakuzuGrid createTakuzu(int);
 

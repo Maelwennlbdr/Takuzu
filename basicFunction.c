@@ -173,21 +173,21 @@ void fillMaskManual(int **mat, int size, int numberOfCellShow) {
 }
 
 TakuzuGrid createdUserTakuzuGrid(TakuzuGrid solutionMatrix, TakuzuGrid maskMatrix) {
-    TakuzuGrid userTakusuGrid;
+    TakuzuGrid userTakuzuGrid;
     int **mask;
     mask = maskMatrix.matrice;
-    userTakusuGrid = createTakuzu(solutionMatrix.size);
+    userTakuzuGrid = createTakuzu(solutionMatrix.size);
     int i, j;
     for (i = 0; i < solutionMatrix.size; i++) {
         for (j = 0; j < solutionMatrix.size; j++) {
             if (mask[i][j] == 1) {
-                (userTakusuGrid.matrice[i][j]) = (solutionMatrix.matrice[i][j]);
+                (userTakuzuGrid.matrice[i][j]) = (solutionMatrix.matrice[i][j]);
             } else {
-                (userTakusuGrid.matrice[i][j]) = -1;
+                (userTakuzuGrid.matrice[i][j]) = -1;
             }
         }
     }
-    return userTakusuGrid;
+    return userTakuzuGrid;
 }
 
 TakuzuGrid createGameTakuzuGrid(int size) {
