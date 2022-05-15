@@ -35,7 +35,6 @@ void randomMove(TakuzuGrid, ChainOfMove**); // Not in master
 
 bool validityGrid(TakuzuGrid); // Not in master
 bool validityCompleteGrid(TakuzuGrid); // Not in master
-bool isGridComplete(TakuzuGrid); // Not in master
 
 ChainOfMove *returnToLastRandomMove(ChainOfMove*, TakuzuGrid);
 

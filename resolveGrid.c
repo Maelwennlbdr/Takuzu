@@ -309,25 +309,10 @@ bool validityGrid(TakuzuGrid takuzuGrid) {
 }
 
 bool validityCompleteGrid(TakuzuGrid takuzuGrid) {
-    if (!isGridComplete(takuzuGrid)) {
+    if (!isMatriceFull(takuzuGrid)) {
         return false;
     }
     return validityGrid(takuzuGrid);
-}
-
-bool isGridComplete(TakuzuGrid takuzuGrid) {
-    int counter = 0, i, j;
-    for (i = 0; i < takuzuGrid.size; i++) {
-        for (j = 0; j < takuzuGrid.size; j++) {
-            if ((takuzuGrid.matrice)[i][j] != -1) {
-                counter++;
-            }
-        }
-    }
-    if (counter == takuzuGrid.size * takuzuGrid.size) {
-        return true;
-    }
-    return false;
 }
 
 ChainOfMove *returnToLastRandomMove(ChainOfMove *headOfList, TakuzuGrid takuzuGrid) {

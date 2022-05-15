@@ -20,7 +20,7 @@ int allmenu() {
             }
             case 2: {
                 printf("Part II-\n");
-                printf("\tDans cette partie pour que le programme joue un nouveau coup, appuyer sur une touche.\n");
+                printf("\tDans cette partie pour que le programme joue un nouveau coup, appuyer sur entrée.\n");
                 int size;
                 size = securityInputSize();
                 menuPartII(size);
@@ -104,7 +104,7 @@ int menuPartII(int sizeGrid) {
     TakuzuGrid mask = createMaskTakuzuGrid(sizeGrid, sizeGrid, 1);
     TakuzuGrid userGrid = createdUserTakuzuGrid(gameGrid, mask);
     ChainOfMove *list = NULL;
-    while ((!validityCompleteGrid(userGrid)) && (!isGridComplete(userGrid))) {
+    while ((!validityCompleteGrid(userGrid)) && (!isMatriceFull(userGrid))) {
         do {
             while (canAMoveBePlay == 1) {
                 canAMoveBePlay = forceMove(userGrid, &list);
