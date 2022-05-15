@@ -9,11 +9,23 @@ int securityInputInt(int borneMin, int borneMax) {
     return userValue;
 }
 
+int securityInputSize() {
+    int size;
+    do {
+        printf("Rentrez la taille souhaiter : ");
+        scanf("%d", &size);
+    } while ((size % 2 == 1) || (size > 9) || (size < 3));
+    return size;
+}
+
 char securityInputChar(char borneMin, char borneMax) {
     char userChar;
     do {
-        printf("Saisir un caractère : \n");
+        printf("Saisir un caractère : ");
         scanf("%c", &userChar);
+        if (userChar > 90) {
+            userChar -= 32;
+        }
     } while ((userChar < borneMin) || (userChar > borneMax));
     return userChar;
 }
@@ -67,6 +79,33 @@ void printMatriceWithMask(TakuzuGrid matrice, TakuzuGrid mask) {
     printf("\n");
 }
 
+void printUserMatrice(TakuzuGrid userGrid) {
+    int i, j, size;
+    size = userGrid.size;
+
+    int **grid;
+    grid = userGrid.matrice;
+
+    printf("\t");
+    for (i = 'A'; i < ('A' + size); i++) {
+        printf("%c\t", i);
+    }
+    printf("\n");
+
+    for (i = 0; i < size; i++) {
+        printf("%d\t", i + 1);
+        for (j = 0; j < size; j++) {
+            if (grid[i][j] != -1) {
+                printf("%d\t", grid[i][j]);
+            } else {
+                printf(" \t");
+            }
+        }
+        printf("\n");
+    }
+    printf("\n");
+}
+
 TakuzuGrid createTakuzu(int size) {
     int i;
     TakuzuGrid matrice;
@@ -78,21 +117,49 @@ TakuzuGrid createTakuzu(int size) {
     return matrice;
 }
 
-void fillMatrixRand(int **mat, int size) {
-
-    int i, j;
-    for (i = 0; i < size; i++) {
-        for (j = 0; j < size; j++) {
-            mat[i][j] = (rand() % 2);
-        }
-    }
-}
 
 void fillMatrix(int **mat, int size) {
     int i, j;
     for (i = 0; i < size; i++) {
         for (j = 0; j < size; j++) {
-            mat[i][j] = 0;
+            mat[i][j] = -1;
+        }
+    }
+}
+
+void fillMaskRandom(int **mat, int size, int numberOfCellShow) {
+    int i, j, indexLig, indexCol;
+    for (i = 0; i < numberOfCellShow; i++) {
+        do {
+            indexLig = rand() % size;
+            indexCol = rand() % size;
+        } while (mat[indexLig][indexCol] == 1);
+        mat[indexLig][indexCol] = 1;
+    }
+    for (i = 0; i < size; i++) {
+        for (j = 0; j < size; j++) {
+            if (mat[i][j] != 1) {
+                mat[i][j] = 0;
+            }
+        }
+    }
+}
+
+void fillMaskManual(int **mat, int size, int numberOfCellShow) {
+    int i, j;
+    Coordonnee coordonneeOfCell;
+    for (i = 0; i < numberOfCellShow; i++) {
+        do {
+            printf("Saisir une coordonnee que vous souhaitez voir apparaitre: \n");
+            coordonneeOfCell = askAndCheckUserCoordonnee(size);
+        } while (mat[coordonneeOfCell.numberLig][coordonneeOfCell.numberCol] == 1);
+        mat[coordonneeOfCell.numberLig][coordonneeOfCell.numberCol] = 1;
+    }
+    for (i = 0; i < size; i++) {
+        for (j = 0; j < size; j++) {
+            if (mat[i][j] != 1) {
+                mat[i][j] = 0;
+            }
         }
     }
 }
@@ -115,14 +182,73 @@ TakuzuGrid createdUserTakuzuGrid(TakuzuGrid solutionMatrix, TakuzuGrid maskMatri
     return userTakusuGrid;
 }
 
-Coordonnee askAndCheckUserCoordonnee(int size){
+TakuzuGrid createGameTakuzuGrid(int size) {
+    TakuzuGrid gameGrid;
+    gameGrid = createTakuzu(size);
+    int **grid;
+    grid = (int **) malloc(sizeof(int *) * size);
+    for (int i = 0; i < size; i++) {
+        grid[i] = malloc(sizeof(int) * size);
+    }
+
+    switch (size) {
+        case 4: {
+            createGrid4(grid);
+            break;
+        }
+        case 8: {
+            createGrid8(grid);
+            break;
+        }
+    }
+    gameGrid.matrice = grid;
+    return gameGrid;
+}
+
+TakuzuGrid createMaskTakuzuGrid(int size, int numberOfCellShow, int randOrManual) {
+    TakuzuGrid mask = createTakuzu(size);
+    if (randOrManual == 1) {
+        fillMaskRandom(mask.matrice, size, numberOfCellShow);
+    } else if (randOrManual == 2) {
+        fillMaskManual(mask.matrice, size, numberOfCellShow);
+    }
+    return mask;
+}
+
+Coordonnee askAndCheckUserCoordonnee(int size) {
     Coordonnee numberCase;
     char indexCol;
     int indexLig;
-    printf("Saisir une coordonnee : \n");
-    indexCol = securityInputChar('A', 'A'+size-1);
+    indexCol = securityInputChar('A', 'A' + size - 1);
     indexLig = securityInputInt(1, size);
-    numberCase.numberLig = indexLig-1;
-    numberCase.numberCol = indexCol-65;
+    numberCase.numberLig = indexLig - 1;
+    numberCase.numberCol = indexCol - 65;
     return numberCase;
+}
+
+
+void playAMove(TakuzuGrid takuzuGrid, Coordonnee playMove) {
+    int size = takuzuGrid.size, indexCol, indexLig;
+    indexCol = playMove.numberCol;
+    indexLig = playMove.numberLig;
+
+    int **grid = takuzuGrid.matrice;
+    grid[indexLig][indexCol] = securityInputInt(0, 1);
+    takuzuGrid.matrice = grid;
+}
+
+bool isMatriceFull(TakuzuGrid takuzuGrid) {
+    int **grid = takuzuGrid.matrice, size = takuzuGrid.size;
+    int i, j, counter = 0;
+    for (i = 0; i < size; i++) {
+        for (j = 0; j < size; j++) {
+            if (grid[i][j] != -1) {
+                counter++;
+            }
+        }
+    }
+    if (counter == size * size) {
+        return true;
+    }
+    return false;
 }

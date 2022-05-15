@@ -3,11 +3,13 @@
 #include <stdbool.h>
 #include "basicFunction.h"
 
-bool sameNumberOf0And1InLig(TakuzuGrid, int);
-bool sameNumberOf0And1InCol(TakuzuGrid, int);
+bool sameNumberOf0And1InLig(TakuzuGrid);
+bool sameNumberOf0And1InCol(TakuzuGrid);
 bool ligAlreadyExisting(TakuzuGrid, int);
 bool colAlreadyExisting(TakuzuGrid, int);
+bool only2SameNumberInLig(TakuzuGrid);
+bool only2SameNumberInCol(TakuzuGrid);
 
-int validityMove();
+int validityMove(TakuzuGrid, TakuzuGrid);
 
 #endif //TAKUSU_VERIFCOUP_H
