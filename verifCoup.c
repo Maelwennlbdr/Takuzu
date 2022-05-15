@@ -143,6 +143,7 @@ int validityMove(TakuzuGrid takuzuGrid, TakuzuGrid originMask) {
     int size = takuzuGrid.size, counter = 0, **matrice = takuzuGrid.matrice, **mask = originMask.matrice;
     Coordonnee currentMove;
 
+    printf("Saisir une coordonnee : \n");
     currentMove = askAndCheckUserCoordonnee(size);
     int indexCol = currentMove.numberCol, indexLig = currentMove.numberLig, oldContent = matrice[indexLig][indexCol];
 

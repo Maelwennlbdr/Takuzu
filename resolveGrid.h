@@ -4,12 +4,12 @@
 #include "basicFunction.h"
 #include "gameMatrix.h"
 
-//Not in master
+
 typedef struct {
     Coordonnee moveCoordonnee;
     int numberPlay;
 } OneMove;
-//Not in master
+
 typedef struct ChainOfMove {
     OneMove movePlay;
     char forceOrRandomMove;
@@ -17,24 +17,24 @@ typedef struct ChainOfMove {
     struct ChainOfMove *nextLink;
 } ChainOfMove;
 
-OneMove afterTwoFollowingSameNumberInLig(TakuzuGrid); // Not in master
-OneMove afterTwoFollowingSameNumberInCol(TakuzuGrid); // Not in master
-OneMove beforeTwoFollowingSameNumberInLig(TakuzuGrid); // Not in master
-OneMove beforeTwoFollowingSameNumberInCol(TakuzuGrid); // Not in master
+OneMove afterTwoFollowingSameNumberInLig(TakuzuGrid);
+OneMove afterTwoFollowingSameNumberInCol(TakuzuGrid);
+OneMove beforeTwoFollowingSameNumberInLig(TakuzuGrid);
+OneMove beforeTwoFollowingSameNumberInCol(TakuzuGrid);
 
-OneMove betweenTwoSameNumberInLig(TakuzuGrid); // Not in master
-OneMove betweenTwoSameNumberInCol(TakuzuGrid); // Not in master
+OneMove betweenTwoSameNumberInLig(TakuzuGrid);
+OneMove betweenTwoSameNumberInCol(TakuzuGrid);
 
-OneMove completeLigIfANumberIsTheRightNumberOfTime(TakuzuGrid); // Not in master
-OneMove completeColIfANumberIsTheRightNumberOfTime(TakuzuGrid); // Not in master
+OneMove completeLigIfANumberIsTheRightNumberOfTime(TakuzuGrid);
+OneMove completeColIfANumberIsTheRightNumberOfTime(TakuzuGrid);
 
 
-void fillTakuzuGridWithAMove(TakuzuGrid, OneMove); // Not in master
-int forceMove(TakuzuGrid, ChainOfMove**); // Not in master
-void randomMove(TakuzuGrid, ChainOfMove**); // Not in master
+void fillTakuzuGridWithAMove(TakuzuGrid, OneMove);
+int forceMove(TakuzuGrid, ChainOfMove**);
+void randomMove(TakuzuGrid, ChainOfMove**);
 
-bool validityGrid(TakuzuGrid); // Not in master
-bool validityCompleteGrid(TakuzuGrid); // Not in master
+bool validityGrid(TakuzuGrid);
+bool validityCompleteGrid(TakuzuGrid);
 
 ChainOfMove *returnToLastRandomMove(ChainOfMove*, TakuzuGrid);
 

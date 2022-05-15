@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void createGrid4(int**); // Not in master
-void createGrid8(int**); // Not in master
+void createGrid4(int**);
+void createGrid8(int**);
 
 #endif //TAKUSU_GAMEMATRIX_H

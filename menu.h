@@ -4,10 +4,10 @@
 #include "verifCoup.h"
 #include "resolveGrid.h"
 
-int allmenu(); // Not in master
+int allmenu();
 
-int menuPartI(int); // Not in master
-int menuPartII(int); // Not in master
-int menuPartIII(int); // Not in master
+int menuPartI(int);
+int menuPartII(int);
+int menuPartIII(int);
 
 #endif //TAKUSU_MENU_H

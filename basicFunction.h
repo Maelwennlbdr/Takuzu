@@ -19,26 +19,26 @@ typedef struct {
 } Coordonnee;
 
 int securityInputInt(int, int);
-int securityInputSize(); // Not in master
+int securityInputSize();
 char securityInputChar(char, char);
 
 void printMatrice(TakuzuGrid);
 void printMatriceWithMask(TakuzuGrid, TakuzuGrid);
-void printUserMatrice(TakusuGrid);//Not in master
+void printUserMatrice(TakusuGrid);
 
 TakuzuGrid createTakuzu(int);
 
 void fillMatrix(int **, int);
-void fillMaskRandom(int **, int, int); //Not in master
-void fillMaskManual(int **, int, int); //Not in master
+void fillMaskRandom(int **, int, int);
+void fillMaskManual(int **, int, int);
 
 TakuzuGrid createdUserTakuzuGrid(TakuzuGrid, TakuzuGrid);
-TakuzuGrid createGameTakuzuGrid(int); //Not in master
-TakuzuGrid createMaskTakuzuGrid(int, int, int); //Not in master
+TakuzuGrid createGameTakuzuGrid(int);
+TakuzuGrid createMaskTakuzuGrid(int, int, int);
 
 Coordonnee askAndCheckUserCoordonnee(int);
-void playAMove(TakuzuGrid, Coordonnee); //Not in master
+void playAMove(TakuzuGrid, Coordonnee);
 
-bool isMatriceFull(TakuzuGrid); //Not in master
+bool isMatriceFull(TakuzuGrid);
 
 #endif //TAKUSU_BASICFUNCTION_H

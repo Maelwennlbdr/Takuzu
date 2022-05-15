@@ -7,9 +7,9 @@ bool sameNumberOf0And1InLig(TakuzuGrid);
 bool sameNumberOf0And1InCol(TakuzuGrid);
 bool ligAlreadyExisting(TakuzuGrid, int);
 bool colAlreadyExisting(TakuzuGrid, int);
-bool only2SameNumberInLig(TakuzuGrid); //Not in master
-bool only2SameNumberInCol(TakuzuGrid); //Not in master
+bool only2SameNumberInLig(TakuzuGrid);
+bool only2SameNumberInCol(TakuzuGrid);
 
-int validityMove(TakuzuGrid, TakuzuGrid); //Not in master
+int validityMove(TakuzuGrid, TakuzuGrid);
 
 #endif //TAKUSU_VERIFCOUP_H

@@ -219,7 +219,6 @@ Coordonnee askAndCheckUserCoordonnee(int size) {
     Coordonnee numberCase;
     char indexCol;
     int indexLig;
-    printf("Saisir une coordonnee : \n");
     indexCol = securityInputChar('A', 'A' + size - 1);
     indexLig = securityInputInt(1, size);
     numberCase.numberLig = indexLig - 1;
