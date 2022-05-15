@@ -26,7 +26,9 @@ int allmenu() {
         }
         case 3: {
             printf("Part III-\n");
-            printf("\tFonction non existante pour le moment.\n");
+            int size;
+            size = securityInputSize();
+            menuPartIII(size);
             break;
         }
     }
@@ -105,4 +107,20 @@ int menuPartII(int sizeGrid) {
     }
 
 }
-int menuPartIII(int sizeGrid){}
+
+int menuPartIII(int sizeGrid) {
+    int choiceUser;
+    printf("\nFait votre choix :\n");
+    printf("\t1- afficher l'ensemble des lignes valides\n");
+    printf("\t2- generer une grille de Takuzu \n");
+    printf("\t3-quitter \n");
+    choiceUser = securityInputInt(1, 3);
+    TakuzuGrid gameGrid = createGameTakuzuGrid(sizeGrid);
+    switch (choiceUser) {
+        case 1:{
+
+        }
+    }
+
+
+}

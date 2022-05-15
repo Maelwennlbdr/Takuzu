@@ -1,7 +1,6 @@
 #ifndef TAKUSU_BASICFUNCTION_H
 #define TAKUSU_BASICFUNCTION_H
 
-#include "basicFunction.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
