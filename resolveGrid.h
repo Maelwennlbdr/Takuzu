@@ -1,5 +1,6 @@
 #ifndef TAKUSU_RESOLVEGRID_H
 #define TAKUSU_RESOLVEGRID_H
+
 #include "verifCoup.h"
 #include "basicFunction.h"
 #include "gameMatrix.h"
@@ -30,19 +31,23 @@ OneMove completeColIfANumberIsTheRightNumberOfTime(TakuzuGrid); // Not in master
 
 
 void fillTakuzuGridWithAMove(TakuzuGrid, OneMove); // Not in master
-int forceMove(TakuzuGrid, ChainOfMove**); // Not in master
-void randomMove(TakuzuGrid, ChainOfMove**); // Not in master
+int forceMove(TakuzuGrid, ChainOfMove **); // Not in master
+void randomMove(TakuzuGrid, ChainOfMove **); // Not in master
 
 bool validityGrid(TakuzuGrid); // Not in master
 bool validityCompleteGrid(TakuzuGrid); // Not in master
 bool isGridComplete(TakuzuGrid); // Not in master
 
-ChainOfMove *returnToLastRandomMove(ChainOfMove*, TakuzuGrid);
+ChainOfMove *returnToLastRandomMove(ChainOfMove *, TakuzuGrid);
 
 ChainOfMove *createLink(OneMove, char);
+
 ChainOfMove *createHeadLink(OneMove, char, ChainOfMove *);
+
 void afficher_liste(ChainOfMove *);
+
 void afficher_liste2(ChainOfMove *);
+
 int taille_liste(ChainOfMove *);
 
 #endif //TAKUSU_RESOLVEGRID_H

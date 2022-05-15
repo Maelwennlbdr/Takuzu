@@ -94,18 +94,40 @@ int menuPartI(int sizeGrid) {
 
 
 int menuPartII(int sizeGrid) {
-    int counter = 0, canAMoveBePlay = 1;
-    char timeBetween2Move = 'f';
+    int canAMoveBePlay = 1;
+    char timeBetween2Move = ' ';
     TakuzuGrid gameGrid = createGameTakuzuGrid(sizeGrid);
-    TakuzuGrid mask = createMaskTakuzuGrid(sizeGrid, sizeGrid * 3, 1);
-    printMatriceWithMask(gameGrid, mask);
+    TakuzuGrid mask = createMaskTakuzuGrid(sizeGrid, sizeGrid, 1);
     TakuzuGrid userGrid = createdUserTakuzuGrid(gameGrid, mask);
-    while (canAMoveBePlay == 1) {
-        canAMoveBePlay = forceMove(userGrid);
-        scanf("%c", &timeBetween2Move);
-        printUserMatrice(userGrid);
-    }
+    ChainOfMove *list = NULL;
+    while ((!validityCompleteGrid(userGrid)) && (!isMatriceFull(userGrid))) {
+        do {
+            while (canAMoveBePlay == 1) {
+                canAMoveBePlay = forceMove(userGrid, &list);
+                scanf("%c", &timeBetween2Move);
+                if (canAMoveBePlay == 1) {
+                    printUserMatrice(userGrid);
+                }
+            }
+            canAMoveBePlay = 1;
+            if (!validityGrid(userGrid)) {
+                list = returnToLastRandomMove(list, userGrid);
+            }
 
+            if (!isMatriceFull(userGrid)) {
+                randomMove(userGrid, &list);
+                printUserMatrice(userGrid);
+            }
+        } while (!isMatriceFull(userGrid));
+
+        if (!validityCompleteGrid(userGrid)) {
+            printf("La matrice n'est pas correct\n");
+            list = returnToLastRandomMove(list, userGrid);
+            printUserMatrice(userGrid);
+        } else {
+            printf("Voila, cette matrice est correcte.\n");
+        }
+    }
 }
 
 int menuPartIII(int sizeGrid) {
@@ -117,8 +139,62 @@ int menuPartIII(int sizeGrid) {
     choiceUser = securityInputInt(1, 3);
     TakuzuGrid gameGrid = createGameTakuzuGrid(sizeGrid);
     switch (choiceUser) {
-        case 1:{
-
+        case 1: {
+            if (sizeGrid == 4) {
+                printf("1010"
+                       "0110"
+                       "0011"
+                       "1001"
+                       "1100"
+                       "0101");
+            } else if (sizeGrid == 8) {
+                printf("00101101"
+                       "00110011"
+                       "00110101"
+                       "00110110"
+                       "01001011"
+                       "01001101"
+                       "01010011"
+                       "01010101"
+                       "01010110"
+                       "01011001"
+                       "01011010"
+                       "01100101"
+                       "01100110"
+                       "01101001"
+                       "01101010"
+                       "10010011"
+                       "10010101"
+                       "10010110"
+                       "10011010"
+                       "10100101"
+                       "10100110"
+                       "10101001"
+                       "10101010"
+                       "10101100"
+                       "10110010"
+                       "10110100"
+                       "11001001"
+                       "11001010"
+                       "11001100"
+                       "11010010"
+                       "11010100");
+            }else{
+                printf("valeur non prise en compte");
+            }
+        }
+        case 2: {
+            TakuzuGrid newGrid = createTakuzu(sizeGrid);
+            fillMatrix(newGrid.matrice, newGrid.size);
+            int counter = 0, canAMoveBePlay = 1;
+            char timeBetween2Move = 'f';
+            printMatriceWithMask(gameGrid, mask);
+            while (canAMoveBePlay == 1) {
+                canAMoveBePlay = forceMove(userGrid);
+                scanf("%c", &timeBetween2Move);
+                printUserMatrice(userGrid);
+            }
+            break;
         }
     }
 

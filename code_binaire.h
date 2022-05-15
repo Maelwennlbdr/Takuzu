@@ -1,7 +1,0 @@
-#include "resolveGrid.h"
-
-#ifndef FUNCTIONLLC_H_CODE_BINAIRE_H
-#define FUNCTIONLLC_H_CODE_BINAIRE_H
-
-
-#endif //FUNCTIONLLC_H_CODE_BINAIRE_H

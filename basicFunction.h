@@ -17,7 +17,6 @@ typedef struct {
 } Coordonnee;
 
 
-
 int securityInputInt(int, int);
 
 int securityInputSize(); // Not in master
@@ -46,6 +45,6 @@ TakuzuGrid createMaskTakuzuGrid(int, int, int); //Not in master
 Coordonnee askAndCheckUserCoordonnee(int);
 
 void playAMove(TakuzuGrid, Coordonnee); //Not in master
-
+bool isMatriceFull(TakuzuGrid); //Not in master
 
 #endif //TAKUSU_BASICFUNCTION_H

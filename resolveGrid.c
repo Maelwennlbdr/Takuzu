@@ -24,7 +24,6 @@ OneMove afterTwoFollowingSameNumberInLig(TakuzuGrid takuzuGrid) {
     return nextMove;
 }
 
-
 OneMove afterTwoFollowingSameNumberInCol(TakuzuGrid takuzuGrid) {
     int i, j, contentOfMove = -1;
     int size = takuzuGrid.size, **grid = takuzuGrid.matrice;
